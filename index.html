@@ -5,29 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PolicyScanner</title>
   <style>
+    :root {
+      --primary: #004aad;
+      --secondary: #f6f8fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: "Segoe UI", Roboto, sans-serif;
-      background: #f6f8fa;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
-      padding: 0;
+      background: var(--secondary);
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 6em 1em 3em;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
     h1 {
-      color: #004aad;
-      font-size: 2.2rem;
+      font-size: 2.5em;
+      color: var(--primary);
       margin-bottom: 0.3em;
     }
 
-    p {
+    p.tagline {
       color: #555;
+      font-size: 1.1em;
       margin-top: 0;
       margin-bottom: 1.5em;
+    }
+
+    button.primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.9em 2em;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button.primary:hover {
+      background: #003b8b;
+    }
+
+    section {
+      padding: 4em 1em;
+      text-align: center;
+      display: none;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     form {
@@ -38,6 +76,7 @@
       text-align: center;
       width: 100%;
       max-width: 400px;
+      margin: 2em auto;
     }
 
     input[type="file"] {
@@ -45,8 +84,8 @@
       width: 100%;
     }
 
-    button {
-      background: #004aad;
+    button.upload {
+      background: var(--primary);
       color: white;
       border: none;
       padding: 0.75em 1.5em;
@@ -55,8 +94,15 @@
       font-size: 1em;
     }
 
-    button:hover {
+    button.upload:hover {
       background: #003b8b;
+    }
+
+    #loading {
+      display: none;
+      margin-top: 1em;
+      color: var(--primary);
+      font-weight: bold;
     }
 
     #output {
@@ -69,59 +115,18 @@
       width: 90%;
       max-width: 600px;
       overflow-x: auto;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    #loading {
-      display: none;
-      margin-top: 1em;
-      color: #004aad;
-      font-weight: bold;
+    footer {
+      text-align: center;
+      padding: 2em;
+      color: #666;
+      font-size: 0.9em;
     }
-  </style>
-</head>
-<body>
-  <h1>PolicyScanner</h1>
-  <p>Upload your home insurance policy to analyse its details instantly.</p>
 
-  <form id="uploadForm">
-    <input type="file" id="fileInput" accept=".pdf,.png,.jpg" required />
-    <br />
-    <button type="submit">Upload & Scan</button>
-  </form>
-
-  <div id="loading">🔍 Scanning your document...</div>
-  <pre id="output"></pre>
-
-  <script>
-    const form = document.getElementById("uploadForm");
-    const output = document.getElementById("output");
-    const loading = document.getElementById("loading");
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      output.textContent = "";
-      loading.style.display = "block";
-
-      const file = document.getElementById("fileInput").files[0];
-      const formData = new FormData();
-      formData.append("file", file);
-
-      try {
-        const res = await fetch("https://policyscanner-backend.onrender.com/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!res.ok) throw new Error("Upload failed");
-        const data = await res.json();
-
-        loading.style.display = "none";
-        output.textContent = JSON.stringify(data, null, 2);
-      } catch (err) {
-        loading.style.display = "none";
-        output.textContent = "❌ Error: " + err.message;
-      }
-    });
-  </script>
-</body>
-</html>
+    a {
+      color: var(--primary);
+      text-decoration: none;
+    }
