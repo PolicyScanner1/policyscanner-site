@@ -6,93 +6,158 @@
   <title>PolicyScanner</title>
   <style>
     body {
-      font-family: system-ui, sans-serif;
-      background-color: #f9fafb;
+      font-family: "Inter", system-ui, sans-serif;
+      background: #f8fafc;
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
-      margin: 0;
     }
+
+    .box {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      padding: 2.5rem;
+      width: 90%;
+      max-width: 550px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .box:hover {
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    }
+
     h1 {
       color: #1e3a8a;
       font-size: 2rem;
-      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
     }
+
+    h1::before {
+      content: "📄";
+      font-size: 1.8rem;
+    }
+
     p {
-      color: #374151;
+      color: #475569;
+      font-size: 1rem;
       margin-bottom: 1.5rem;
     }
-    .box {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 450px;
-      width: 90%;
-    }
+
     input[type="file"] {
       margin: 1rem 0;
     }
+
     button {
       background: #2563eb;
       color: white;
       border: none;
-      padding: 0.6rem 1.4rem;
+      padding: 0.7rem 1.6rem;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.2s;
     }
+
     button:hover {
       background: #1d4ed8;
     }
+
     #result {
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       text-align: left;
+      background: #f1f5f9;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      font-size: 0.95rem;
+      color: #1e293b;
       white-space: pre-wrap;
-      background: #f3f4f6;
-      border-radius: 8px;
-      padding: 1rem;
-      font-family: monospace;
-      max-height: 300px;
-      overflow-y: auto;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 1.5rem;
     }
   </style>
 </head>
+
 <body>
   <div class="box">
-    <h1>📄 PolicyScanner</h1>
-    <p>Upload your insurance document to extract details instantly.</p>
+    <h1>PolicyScanner</h1>
+    <p>Upload your insurance document to extract key policy details instantly.</p>
+
     <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
+    <br />
     <button onclick="uploadFile()">Upload</button>
+
     <div id="result"></div>
+  </div>
+
+  <div class="footer">
+    © 2025 PolicyScanner — Building trust in insurance through transparency.
   </div>
 
   <script>
     async function uploadFile() {
-      const fileInput = document.getElementById('fileInput');
-      const resultDiv = document.getElementById('result');
+      const fileInput = document.getElementById("fileInput");
+      const resultDiv = document.getElementById("result");
       const file = fileInput.files[0];
-      if (!file) return alert('Please select a file first.');
+      if (!file) return alert("Please select a file first.");
 
-      resultDiv.textContent = 'Processing... ⏳';
+      resultDiv.innerHTML = "<em>Processing your document...</em> ⏳";
+
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
 
       try {
-        const response = await fetch('https://policyscanner-backend.onrender.com/upload', {
-          method: 'POST',
-          body: formData
+        const response = await fetch("https://policyscanner-backend.onrender.com/upload", {
+          method: "POST",
+          body: formData,
         });
-        if (!response.ok) throw new Error('Upload failed.');
+
+        if (!response.ok) throw new Error("Upload failed.");
+
         const data = await response.json();
-        resultDiv.textContent = JSON.stringify(data, null, 2);
+
+        // Try to find and format key details
+        const jsonText = JSON.stringify(data, null, 2);
+        const policy = JSON.parse(jsonText.match(/\{[\s\S]*\}/)[0]);
+
+        const details = `
+<b>Policyholder:</b> ${policy.homeInsurancePolicy.policyholder?.name || "N/A"}<br>
+<b>Date of Birth:</b> ${policy.homeInsurancePolicy.policyholder?.date_of_birth || "N/A"}<br>
+<b>Occupation:</b> ${policy.homeInsurancePolicy.policyholder?.occupation || "N/A"}<br><br>
+<b>Insurer:</b> ${policy.homeInsurancePolicy.insurer?.name || "N/A"}<br>
+<b>Policy Number:</b> ${policy.homeInsurancePolicy.insurer?.policy_number || "N/A"}<br>
+<b>Start Date:</b> ${policy.homeInsurancePolicy.policy_period?.start_date || "N/A"}<br>
+<b>End Date:</b> ${policy.homeInsurancePolicy.policy_period?.end_date || "N/A"}<br>
+<b>Renewal Premium:</b> ${policy.homeInsurancePolicy.annual_renewal_premium || "N/A"}<br><br>
+<b>Address:</b> ${policy.homeInsurancePolicy.property_details?.address || "N/A"}<br>
+<b>Postcode:</b> ${policy.homeInsurancePolicy.property_details?.postcode || "N/A"}<br>
+<b>Type:</b> ${policy.homeInsurancePolicy.property_details?.type || "N/A"}<br>
+<b>Bedrooms:</b> ${policy.homeInsurancePolicy.property_details?.bedrooms || "N/A"}<br>
+<b>Bathrooms:</b> ${policy.homeInsurancePolicy.property_details?.bathrooms || "N/A"}<br>
+<b>Year Built:</b> ${policy.homeInsurancePolicy.property_details?.year_built || "N/A"}<br>
+<b>Construction:</b> ${policy.homeInsurancePolicy.property_details?.construction_type || "N/A"}<br>
+        `;
+
+        resultDiv.innerHTML = details;
       } catch (err) {
-        resultDiv.textContent = 'Error: ' + err.message;
+        resultDiv.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
       }
     }
   </script>
 </body>
 </html>
+
