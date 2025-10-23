@@ -89,6 +89,14 @@
       color: #64748b;
       margin-top: 1.5rem;
     }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 
@@ -128,36 +136,47 @@
 
         if (!response.ok) throw new Error("Upload failed.");
 
-        const data = await response.json();
+        // More forgiving parsing logic
+        const responseText = await response.text();
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          // clean accidental markdown fences like ```json or ```
+          data = JSON.parse(responseText.replace(/```json|```/g, "").trim());
+        }
 
-        // Try to find and format key details
         const jsonText = JSON.stringify(data, null, 2);
-        const policy = JSON.parse(jsonText.match(/\{[\s\S]*\}/)[0]);
+        let policy;
+        try {
+          policy = data.homeInsurancePolicy || JSON.parse(jsonText.match(/\{[\s\S]*\}/)[0]);
+        } catch {
+          throw new Error("Unable to parse policy structure.");
+        }
 
         const details = `
-<b>Policyholder:</b> ${policy.homeInsurancePolicy.policyholder?.name || "N/A"}<br>
-<b>Date of Birth:</b> ${policy.homeInsurancePolicy.policyholder?.date_of_birth || "N/A"}<br>
-<b>Occupation:</b> ${policy.homeInsurancePolicy.policyholder?.occupation || "N/A"}<br><br>
-<b>Insurer:</b> ${policy.homeInsurancePolicy.insurer?.name || "N/A"}<br>
-<b>Policy Number:</b> ${policy.homeInsurancePolicy.insurer?.policy_number || "N/A"}<br>
-<b>Start Date:</b> ${policy.homeInsurancePolicy.policy_period?.start_date || "N/A"}<br>
-<b>End Date:</b> ${policy.homeInsurancePolicy.policy_period?.end_date || "N/A"}<br>
-<b>Renewal Premium:</b> ${policy.homeInsurancePolicy.annual_renewal_premium || "N/A"}<br><br>
-<b>Address:</b> ${policy.homeInsurancePolicy.property_details?.address || "N/A"}<br>
-<b>Postcode:</b> ${policy.homeInsurancePolicy.property_details?.postcode || "N/A"}<br>
-<b>Type:</b> ${policy.homeInsurancePolicy.property_details?.type || "N/A"}<br>
-<b>Bedrooms:</b> ${policy.homeInsurancePolicy.property_details?.bedrooms || "N/A"}<br>
-<b>Bathrooms:</b> ${policy.homeInsurancePolicy.property_details?.bathrooms || "N/A"}<br>
-<b>Year Built:</b> ${policy.homeInsurancePolicy.property_details?.year_built || "N/A"}<br>
-<b>Construction:</b> ${policy.homeInsurancePolicy.property_details?.construction_type || "N/A"}<br>
+<b>Policyholder:</b> ${policy.policyholder?.name || "N/A"}<br>
+<b>Date of Birth:</b> ${policy.policyholder?.date_of_birth || "N/A"}<br>
+<b>Occupation:</b> ${policy.policyholder?.occupation || "N/A"}<br><br>
+<b>Insurer:</b> ${policy.insurer?.name || "N/A"}<br>
+<b>Policy Number:</b> ${policy.insurer?.policy_number || "N/A"}<br>
+<b>Start Date:</b> ${policy.policy_period?.start_date || "N/A"}<br>
+<b>End Date:</b> ${policy.policy_period?.end_date || "N/A"}<br>
+<b>Renewal Premium:</b> ${policy.annual_renewal_premium || "N/A"}<br><br>
+<b>Address:</b> ${policy.property_details?.address || "N/A"}<br>
+<b>Postcode:</b> ${policy.property_details?.postcode || "N/A"}<br>
+<b>Type:</b> ${policy.property_details?.type || "N/A"}<br>
+<b>Bedrooms:</b> ${policy.property_details?.bedrooms || "N/A"}<br>
+<b>Bathrooms:</b> ${policy.property_details?.bathrooms || "N/A"}<br>
+<b>Year Built:</b> ${policy.property_details?.year_built || "N/A"}<br>
+<b>Construction:</b> ${policy.property_details?.construction_type || "N/A"}<br>
         `;
 
         resultDiv.innerHTML = details;
       } catch (err) {
-        resultDiv.innerHTML = `<span style="color:red;">Error: ${err.message}</span>`;
+        resultDiv.innerHTML = `<div class="error">Error: ${err.message}</div>`;
       }
     }
   </script>
 </body>
 </html>
-
