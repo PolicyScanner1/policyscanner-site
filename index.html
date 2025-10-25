@@ -37,6 +37,7 @@
       font-weight: 500;
       transition: color 0.2s;
     }
+
     nav a:hover { color: #1d4ed8; }
 
     .hero {
@@ -53,6 +54,7 @@
       max-width: 620px;
       margin: 0 auto 2rem;
     }
+
     .hero button {
       background: #fff;
       color: #1e3a8a;
@@ -85,53 +87,51 @@
     }
 
     .upload-card h3 { margin-bottom: 1rem; color: #1e40af; }
-    input[type="file"] { margin: 1rem 0; }
-    button.upload {
+    .custom-file-upload {
       background: #2563eb;
+      color: white;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 600;
+      transition: background 0.2s ease;
+      margin-bottom: 1rem;
+    }
+    .custom-file-upload:hover {
+      background: #1d4ed8;
+    }
+    input[type="file"] {
+      display: none;
+    }
+
+    button.upload {
+      background: #1e3a8a;
       color: #fff;
       border: none;
-      padding: 0.7rem 1.5rem;
+      padding: 0.8rem 1.7rem;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
-      transition: background 0.2s ease;
-    }
-    button.upload:hover { background: #1d4ed8; }
-
-    .features {
-      background: #f1f5f9;
-      padding: 4rem 1rem;
-      text-align: center;
-    }
-    .features h2 { color: #1e40af; margin-bottom: 2rem; }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .feature {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-    }
-    .feature h3 { color: #2563eb; margin-bottom: 0.5rem; }
-
-    .contact {
-      text-align: center;
-      padding: 3rem 1rem 4rem;
-      background: #fff;
-    }
-    .contact h2 { color: #1e40af; margin-bottom: 0.5rem; }
-    .contact a {
-      color: #2563eb;
       font-weight: 600;
-      text-decoration: none;
-      font-size: 1.1rem;
+      transition: background 0.2s ease;
+      margin-top: 0.5rem;
     }
-    .contact a:hover { text-decoration: underline; }
+
+    button.upload:hover { background: #172554; }
+
+    #result {
+      text-align: left;
+      background: #f1f5f9;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      max-height: 500px;
+      overflow-y: auto;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
 
     footer {
       text-align: center;
@@ -146,55 +146,29 @@
   <header>
     <h1>PolicyScanner</h1>
     <nav>
-      <a href="#features">Features</a>
       <a href="#demo">Compare</a>
-      <a href="#contact">Contact</a>
+      <a href="mailto:hello@policyscanner.co.uk">Contact</a>
     </nav>
   </header>
 
   <section class="hero">
     <h2>Smarter Home Insurance Comparison</h2>
-    <p>PolicyScanner analyses your current insurance documents using AI, helping you instantly see if you’re overpaying or under-covered — without the jargon or hidden fees.</p>
+    <p>Upload your policy to see how your cover, excesses, and premiums compare with the market — all powered by AI.</p>
     <button onclick="document.getElementById('fileInput').scrollIntoView({ behavior: 'smooth' })">Try It Now ↓</button>
   </section>
 
   <section class="demo-section" id="demo">
     <div class="upload-card">
       <h3>Upload Your Renewal or Policy Document</h3>
-      <p style="color:#475569;">We’ll analyse your cover and compare against top UK insurers.</p>
+      <p style="color:#475569;">We'll analyse your cover and display it in an easy-to-read breakdown.</p>
+
+      <label for="fileInput" class="custom-file-upload">📄 Choose File</label>
       <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
       <br />
       <button class="upload" onclick="uploadFile()">Upload & Compare</button>
+
       <div id="result"></div>
     </div>
-  </section>
-
-  <section class="features" id="features">
-    <h2>Why Choose PolicyScanner?</h2>
-    <div class="feature-grid">
-      <div class="feature">
-        <h3>💡 True Cover Comparison</h3>
-        <p>We don’t just look for the cheapest deal — we match on cover level, excesses, and add-ons, ensuring you’re genuinely protected.</p>
-      </div>
-      <div class="feature">
-        <h3>⚡ Instant Insights</h3>
-        <p>Upload your renewal PDF or photo and get an instant breakdown of your policy’s strengths and gaps.</p>
-      </div>
-      <div class="feature">
-        <h3>🔍 Transparent Pricing</h3>
-        <p>See exactly where your premium goes and how competitors compare — no hidden broker fees or upsells.</p>
-      </div>
-      <div class="feature">
-        <h3>🏦 Trusted Insurers</h3>
-        <p>We work with top UK insurers and MGAs to ensure accurate comparisons and verified data.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="contact" id="contact">
-    <h2>Contact Us</h2>
-    <p>For partnership or media enquiries, reach us at:</p>
-    <a href="mailto:hello@policyscanner.co.uk">hello@policyscanner.co.uk</a>
   </section>
 
   <footer>
@@ -220,7 +194,61 @@
         });
 
         const data = await response.json();
-        resultDiv.innerHTML = "<h4>📋 Analysis Result</h4><pre>" + JSON.stringify(data, null, 2) + "</pre>";
+
+        // Create formatted display
+        const display = `
+📋 **Policyholder:** ${data.policyholder_name || "N/A"}
+🏢 **Insurer:** ${data.insurer_name || "N/A"}
+📄 **Policy Number:** ${data.policy_number || "N/A"}
+📅 **Start Date:** ${data.start_date || "N/A"}
+📅 **End Date:** ${data.end_date || "N/A"}
+💷 **Renewal Premium:** £${data.renewal_premium || "N/A"}
+
+🏠 **Property Details**
+  Address: ${data.address || "N/A"}
+  Postcode: ${data.postcode || "N/A"}
+  Type: ${data.property_type || "N/A"}
+  Bedrooms: ${data.bedrooms || "N/A"}
+  Bathrooms: ${data.bathrooms || "N/A"}
+  Year Built: ${data.year_built || "N/A"}
+  Construction: ${data.construction_type || "N/A"}
+  Roof: ${data.roof_type || "N/A"}
+  Flat Roof: ${data.flat_roof_percentage || "N/A"}%
+  Listed Status: ${data.listed_status || "N/A"}
+
+🧾 **Covers**
+  Buildings Sum Insured: £${data.buildings_sum_insured || "N/A"}
+  Contents Sum Insured: £${data.contents_sum_insured || "N/A"}
+  Accidental Damage: ${data.accidental_damage_cover || "N/A"}
+  Legal Expenses: ${data.legal_expenses_cover || "N/A"}
+  Personal Possessions: ${data.personal_possessions_cover || "N/A"}
+  Home Emergency: ${data.home_emergency_cover || "N/A"}
+
+💰 **Excesses**
+  Standard: £${data.excess_standard || "N/A"}
+  Voluntary: £${data.excess_voluntary || "N/A"}
+
+⚙️ **Specified Items**
+  ${(data.specified_items || [])
+    .map((i) => `- ${i.item} (£${i.value})`)
+    .join("\n") || "None"}
+
+🧯 **Security Features**
+  ${(data.security_features || []).join(", ") || "N/A"}
+
+📉 **Previous Claims**
+  ${(data.previous_claims || [])
+    .map((c) => `${c.type} (£${c.amount}) - ${c.date}`)
+    .join("\n") || "None"}
+
+📜 **Endorsements**
+  ${(data.endorsements || []).join("\n") || "None"}
+
+🚫 **Exclusions**
+  ${(data.exclusions || []).join("\n") || "None"}
+`;
+
+        resultDiv.textContent = display.trim();
       } catch (err) {
         resultDiv.innerHTML = "<span style='color:red'>Error: " + err.message + "</span>";
       }
