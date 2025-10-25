@@ -39,32 +39,92 @@
 
     nav a:hover { color: #1d4ed8; }
 
+    /* Hero */
     .hero {
+      padding: 3rem 2rem 2.5rem;
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+      color: white;
       text-align: center;
-      padding: 5rem 2rem 4rem;
-      background: linear-gradient(to bottom right, #2563eb, #1e3a8a);
+    }
+
+    .hero-content {
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .hero button {
+      margin-top: 1rem;
+      background: white;
+      color: #1e3a8a;
+      border: none;
+      padding: 0.75rem 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .hero button:hover { background: #e2e8f0; transform: translateY(-1px); }
+
+    .feature-row {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      flex: 1;
+      min-width: 220px;
+      max-width: 280px;
+      text-align: center;
+      color: #f1f5f9;
+    }
+
+    .feature span {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature h4 {
+      margin: 0.4rem 0 0.3rem;
       color: white;
     }
 
-    .hero h2 { font-size: 2.4rem; margin-bottom: 1rem; }
-    .hero p { max-width: 640px; margin: 0 auto 2rem; color: #e0e7ff; }
-
-    .hero button {
-      background: #fff;
-      color: #1e3a8a;
-      border: none;
-      border-radius: 8px;
-      padding: 0.9rem 1.6rem;
-      font-weight: 600;
-      cursor: pointer;
+    .feature p {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.4;
     }
 
-    .hero button:hover { background: #e2e8f0; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
+    /* Upload Section */
     .container {
       display: flex;
       justify-content: center;
-      margin-top: -2rem;
+      margin-top: -1.5rem;
       padding: 2rem;
     }
 
@@ -139,6 +199,7 @@
     td:first-child { font-weight: 500; color: #334155; }
 
     ul { margin: 0.4rem 0 0.6rem 1.2rem; color: #0f172a; }
+
     footer {
       text-align: center;
       padding: 2rem;
@@ -159,12 +220,32 @@
   </header>
 
   <section class="hero">
-    <h2>Smarter Home Insurance Comparison</h2>
-    <p>Upload your renewal document to instantly see a breakdown of your buildings and contents cover — all structured for accuracy and transparency.</p>
-    <button onclick="document.getElementById('fileInput').scrollIntoView({behavior: 'smooth'})">Try it now ↓</button>
+    <div class="hero-content">
+      <h2>Smarter Home Insurance Comparison</h2>
+      <p>Upload your renewal document to instantly see how your cover, excesses, and premiums compare — all structured for clarity and accuracy.</p>
+      <button onclick="document.getElementById('upload-section').scrollIntoView({behavior:'smooth'})">Try it now ↓</button>
+    </div>
+
+    <div class="feature-row">
+      <div class="feature">
+        <span>⚡</span>
+        <h4>Instant Results</h4>
+        <p>See your policy breakdown in seconds using AI-powered document parsing.</p>
+      </div>
+      <div class="feature">
+        <span>🔍</span>
+        <h4>Cover Transparency</h4>
+        <p>Compare buildings and contents cover line-by-line for true clarity.</p>
+      </div>
+      <div class="feature">
+        <span>🤝</span>
+        <h4>Trusted Insights</h4>
+        <p>Built to help homeowners make confident, data-driven decisions.</p>
+      </div>
+    </div>
   </section>
 
-  <div class="container" id="demo">
+  <div class="container" id="upload-section">
     <div class="card">
       <div class="upload-area">
         <label for="fileInput" class="custom-file-upload">📄 Choose File</label>
