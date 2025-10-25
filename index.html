@@ -3,154 +3,253 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PolicyScanner</title>
-
+  <title>PolicyScanner | AI Document Intelligence</title>
   <style>
     body {
       font-family: "Inter", system-ui, sans-serif;
-      background: #f8fafc;
       margin: 0;
-      padding: 0;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      background: #ffffffcc;
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.4rem;
+      color: #2563eb;
+      font-weight: 700;
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #334155;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: #1d4ed8;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 6rem 2rem 3rem 2rem;
+      background: linear-gradient(to bottom right, #2563eb, #1e3a8a);
+      color: white;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: #e0e7ff;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .hero button {
+      background: #ffffff;
+      color: #1e3a8a;
+      padding: 0.8rem 1.6rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .hero button:hover {
+      background: #e2e8f0;
+    }
+
+    .demo-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      margin-top: -3rem;
+      padding: 3rem 1rem 5rem;
     }
 
-    .container {
+    .upload-card {
       background: #fff;
-      border-radius: 18px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      padding: 2rem 2rem 3rem;
       width: 95%;
-      max-width: 850px;
+      max-width: 800px;
       text-align: center;
     }
 
-    h1 {
-      color: #1e3a8a;
-      font-size: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-    }
-
-    h1::before {
-      content: "📄";
-    }
-
-    p {
-      color: #475569;
-      font-size: 1rem;
+    .upload-card h3 {
+      margin-bottom: 1rem;
+      color: #1e40af;
     }
 
     input[type="file"] {
       margin: 1rem 0;
     }
 
-    button {
+    button.upload {
       background: #2563eb;
       color: #fff;
       border: none;
-      padding: 0.7rem 1.6rem;
+      padding: 0.7rem 1.5rem;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
-      font-weight: 500;
       transition: background 0.2s ease;
     }
 
-    button:hover {
+    button.upload:hover {
       background: #1d4ed8;
     }
 
-    .section {
-      text-align: left;
+    .features {
       background: #f1f5f9;
-      border-radius: 10px;
-      padding: 1.2rem 1.4rem;
-      margin-top: 1.3rem;
-    }
-
-    .section h3 {
-      color: #1e40af;
-      border-bottom: 2px solid #3b82f6;
-      padding-bottom: 0.4rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .field {
-      margin: 0.3rem 0;
-    }
-
-    .field strong {
-      color: #1e293b;
-    }
-
-    ul {
-      margin: 0.3rem 0 0.6rem 1.2rem;
-      padding: 0;
-      color: #1e293b;
-    }
-
-    li {
-      margin: 0.2rem 0;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 0.5rem;
-    }
-
-    table, th, td {
-      border: 1px solid #cbd5e1;
-    }
-
-    th, td {
-      text-align: left;
-      padding: 0.4rem 0.6rem;
-      font-size: 0.9rem;
-    }
-
-    th {
-      background-color: #e2e8f0;
-      color: #1e293b;
-    }
-
-    .footer {
+      padding: 4rem 1rem;
       text-align: center;
-      font-size: 0.8rem;
-      color: #64748b;
-      margin-top: 1.5rem;
     }
 
-    .error {
-      background: #fee2e2;
-      color: #991b1b;
-      padding: 0.7rem 1rem;
-      border-radius: 8px;
-      margin-top: 1rem;
+    .features h2 {
+      color: #1e40af;
+      margin-bottom: 2rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .feature {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature h3 {
+      color: #2563eb;
+      margin-bottom: 0.5rem;
+    }
+
+    .integrations {
+      padding: 4rem 1rem;
+      text-align: center;
+    }
+
+    .integrations h2 {
+      color: #1e40af;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      opacity: 0.9;
+    }
+
+    .logo-row img {
+      height: 40px;
+      filter: grayscale(100%);
+      transition: filter 0.2s;
+    }
+
+    .logo-row img:hover {
+      filter: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1e293b;
+      color: #cbd5e1;
     }
   </style>
 </head>
 
 <body>
-  <div class="container">
+  <header>
     <h1>PolicyScanner</h1>
-    <p>Upload your insurance document to extract key policy details automatically.</p>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#integrations">Integrations</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#demo">Demo</a>
+    </nav>
+  </header>
 
-    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
-    <br />
-    <button onclick="uploadFile()">Upload</button>
+  <section class="hero">
+    <h2>Extract Key Policy Data in Seconds</h2>
+    <p>Upload insurance documents, and our AI automatically parses, structures, and exports your data into CRMs, spreadsheets, and databases.</p>
+    <button onclick="document.getElementById('fileInput').scrollIntoView({ behavior: 'smooth' })">Try the Demo ↓</button>
+  </section>
 
-    <div id="result"></div>
-  </div>
+  <section class="demo-section" id="demo">
+    <div class="upload-card">
+      <h3>Upload a Policy Document</h3>
+      <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
+      <br />
+      <button class="upload" onclick="uploadFile()">Upload</button>
+      <div id="result"></div>
+    </div>
+  </section>
 
-  <div class="footer">
-    © 2025 PolicyScanner — Building trust in insurance through transparency.
-  </div>
+  <section class="features" id="features">
+    <h2>Why PolicyScanner?</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>⚡ Instant Data Extraction</h3>
+        <p>Upload any document, and our AI instantly identifies and extracts policy details with high accuracy.</p>
+      </div>
+      <div class="feature">
+        <h3>📊 Integrates Everywhere</h3>
+        <p>Send parsed data directly to Google Sheets, CRMs, SQL databases, or your internal systems via API.</p>
+      </div>
+      <div class="feature">
+        <h3>🔒 Secure & Compliant</h3>
+        <p>All files are encrypted and deleted after processing, ensuring GDPR and ISO-27001 level data security.</p>
+      </div>
+      <div class="feature">
+        <h3>🤖 AI Optimized</h3>
+        <p>Fine-tuned on thousands of real policy formats to ensure accuracy across all major UK insurers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="integrations" id="integrations">
+    <h2>Works Seamlessly With</h2>
+    <div class="logo-row">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Google_Sheets_logo.svg" alt="Sheets" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Salesforce_logo.svg" alt="Salesforce" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/HubSpot_Logo.svg" alt="HubSpot" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_SQL_Server_Logo.svg" alt="SQL" />
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Api_icon.svg" alt="API" />
+    </div>
+  </section>
+
+  <footer>
+    © 2025 PolicyScanner — AI for insurance data automation.
+  </footer>
 
   <script>
     async function uploadFile() {
@@ -170,116 +269,13 @@
           body: formData,
         });
 
-        if (!response.ok) throw new Error("Upload failed.");
         const data = await response.json();
-        console.log("✅ Parsed JSON from backend:", data);
-
-        resultDiv.innerHTML = "";
-
-        // Helper functions
-        const listItems = (arr) => arr && arr.length ? `<ul>${arr.map(i => `<li>${i}</li>`).join('')}</ul>` : "N/A";
-        const tableRows = (arr, cols) => arr && arr.length ? `
-          <table>
-            <tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr>
-            ${arr.map(o => `<tr>${cols.map(c => `<td>${o[c.toLowerCase().replace(/ /g, "_")] ?? ""}</td>`).join('')}</tr>`).join('')}
-          </table>
-        ` : "N/A";
-
-        // --- Policyholder ---
-        resultDiv.innerHTML += `
-          <div class="section">
-            <h3>👤 Policyholder Details</h3>
-            <div><strong>Name:</strong> ${data.policyholder_name ?? "N/A"}</div>
-            <div><strong>Date of Birth:</strong> ${data.date_of_birth ?? "N/A"}</div>
-            <div><strong>Occupation:</strong> ${data.occupation ?? "N/A"}</div>
-            <div><strong>Marital Status:</strong> ${data.marital_status ?? "N/A"}</div>
-            <div><strong>Insurer:</strong> ${data.insurer_name ?? "N/A"}</div>
-            <div><strong>Policy Number:</strong> ${data.policy_number ?? "N/A"}</div>
-            <div><strong>Start Date:</strong> ${data.start_date ?? "N/A"}</div>
-            <div><strong>End Date:</strong> ${data.end_date ?? "N/A"}</div>
-          </div>
-        `;
-
-        // --- Property ---
-        resultDiv.innerHTML += `
-          <div class="section">
-            <h3>🏠 Property Details</h3>
-            <div><strong>Address:</strong> ${data.address ?? "N/A"}</div>
-            <div><strong>Postcode:</strong> ${data.postcode ?? "N/A"}</div>
-            <div><strong>Type:</strong> ${data.property_type ?? "N/A"}</div>
-            <div><strong>Bedrooms:</strong> ${data.bedrooms ?? "N/A"}</div>
-            <div><strong>Bathrooms:</strong> ${data.bathrooms ?? "N/A"}</div>
-            <div><strong>Year Built:</strong> ${data.year_built ?? "N/A"}</div>
-            <div><strong>Construction:</strong> ${data.construction_type ?? "N/A"}</div>
-            <div><strong>Roof Type:</strong> ${data.roof_type ?? "N/A"}</div>
-            <div><strong>Flat Roof %:</strong> ${data.flat_roof_percentage ?? "N/A"}</div>
-            <div><strong>Listed Status:</strong> ${data.listed_status ?? "N/A"}</div>
-            <div><strong>Occupancy:</strong> ${data.occupancy_type ?? "N/A"}</div>
-            <div><strong>Security Features:</strong> ${listItems(data.security_features)}</div>
-          </div>
-        `;
-
-        // --- Covers ---
-        resultDiv.innerHTML += `
-          <div class="section">
-            <h3>🛡️ Cover Details</h3>
-            <div><strong>Buildings Sum Insured:</strong> £${data.buildings_sum_insured ?? "N/A"}</div>
-            <div><strong>Contents Sum Insured:</strong> £${data.contents_sum_insured ?? "N/A"}</div>
-            <div><strong>Accidental Damage:</strong> ${data.accidental_damage_cover ?? "N/A"}</div>
-            <div><strong>Legal Expenses:</strong> ${data.legal_expenses_cover ?? "N/A"}</div>
-            <div><strong>Personal Possessions:</strong> ${data.personal_possessions_cover ?? "N/A"}</div>
-            <div><strong>Home Emergency:</strong> ${data.home_emergency_cover ?? "N/A"}</div>
-          </div>
-        `;
-
-        // --- Financials ---
-        resultDiv.innerHTML += `
-          <div class="section">
-            <h3>💷 Financials & Excesses</h3>
-            <div><strong>Renewal Premium:</strong> £${data.renewal_premium ?? "N/A"}</div>
-            <h4>Excesses:</h4>
-            <table>
-              <tr><th></th><th>Buildings</th><th>Contents</th></tr>
-              <tr><td>Voluntary</td><td>£${data.buildings_excess_voluntary ?? data.excess_voluntary ?? "N/A"}</td><td>£${data.contents_excess_voluntary ?? data.excess_voluntary ?? "N/A"}</td></tr>
-              <tr><td>Compulsory</td><td>£${data.buildings_excess_compulsory ?? data.excess_standard ?? "N/A"}</td><td>£${data.contents_excess_compulsory ?? data.excess_standard ?? "N/A"}</td></tr>
-            </table>
-
-            <h4>No Claims Discount:</h4>
-            <table>
-              <tr><th></th><th>Buildings</th><th>Contents</th></tr>
-              <tr><td>Years</td><td>${data.buildings_ncd_years ?? data.no_claims_discount_years ?? "N/A"}</td><td>${data.contents_ncd_years ?? data.no_claims_discount_years ?? "N/A"}</td></tr>
-            </table>
-
-            <div><strong>Previous Claims:</strong> ${tableRows(data.previous_claims, ["Date", "Type", "Amount"])}</div>
-          </div>
-        `;
-
-        // --- Endorsements & Exclusions ---
-        resultDiv.innerHTML += `
-          <div class="section">
-            <h3>⚠️ Endorsements & Exclusions</h3>
-            <div><strong>Specified Items:</strong>
-              ${data.specified_items && data.specified_items.length ? `
-              <table>
-                <tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
-                ${data.specified_items.map(i => `
-                  <tr>
-                    <td>${i.item ?? "N/A"}</td>
-                    <td>£${i.value ?? "N/A"}</td>
-                    <td>${i.covered_away ?? "N/A"}</td>
-                  </tr>`).join('')}
-              </table>` : "N/A"}
-            </div>
-            <div><strong>Endorsements:</strong> ${listItems(data.endorsements)}</div>
-            <div><strong>Exclusions:</strong> ${listItems(data.exclusions)}</div>
-          </div>
-        `;
-
+        resultDiv.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
       } catch (err) {
-        console.error(err);
-        resultDiv.innerHTML = `<div class="error">Error: ${err.message}</div>`;
+        resultDiv.innerHTML = "<span style='color:red'>Error: " + err.message + "</span>";
       }
     }
   </script>
 </body>
 </html>
+
