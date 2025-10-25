@@ -200,7 +200,7 @@
 
     ul { margin: 0.4rem 0 0.6rem 1.2rem; color: #0f172a; }
 
-    /* New blue dividers between sections */
+    /* Blue dividers between sections */
     .section b {
       display: block;
       margin-top: 1rem;
@@ -213,6 +213,52 @@
       border-top: 2px solid #bfdbfe;
       padding-top: 0.8rem;
       margin-top: 1.2rem;
+    }
+
+    /* Next Steps Card */
+    .next-steps {
+      background: #e0edff;
+      border-left: 4px solid #2563eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-top: 1.8rem;
+      text-align: center;
+      color: #1e3a8a;
+    }
+
+    .next-steps h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .next-steps p {
+      margin: 0.2rem 0 1rem;
+      color: #334155;
+    }
+
+    .next-steps .btn {
+      display: inline-block;
+      margin: 0.4rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, #2563eb, #1d4ed8);
+      color: white;
+    }
+    .btn-primary:hover { opacity: 0.9; }
+
+    .btn-secondary {
+      background: white;
+      color: #1e3a8a;
+      border: 2px solid #1e3a8a;
+    }
+    .btn-secondary:hover {
+      background: #eff6ff;
     }
 
     footer {
@@ -381,6 +427,13 @@
 
           <b>Exclusions:</b>
           ${Array.isArray(d.exclusions) && d.exclusions.length ? `<ul>${d.exclusions.map(e => `<li>${e}</li>`).join("")}</ul>` : "None."}
+        </div>
+
+        <div class="next-steps">
+          <h4>🚀 Next Steps</h4>
+          <p>Ready to take control of your home insurance?</p>
+          <a class="btn btn-primary" href="#">Compare Your Renewal (Coming Soon)</a>
+          <a class="btn btn-secondary" href="#">Get a New Quote (Coming Soon)</a>
         </div>
       `;
     }
