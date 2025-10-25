@@ -14,7 +14,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
     }
 
@@ -89,11 +88,42 @@
       color: #1e293b;
     }
 
-    pre {
-      background: #e2e8f0;
-      padding: 0.6rem;
-      border-radius: 6px;
-      overflow-x: auto;
+    ul {
+      margin: 0.3rem 0 0.6rem 1.2rem;
+      padding: 0;
+      color: #1e293b;
+    }
+
+    li {
+      margin: 0.2rem 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    table, th, td {
+      border: 1px solid #cbd5e1;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background-color: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #64748b;
+      margin-top: 1.5rem;
     }
 
     .error {
@@ -102,13 +132,6 @@
       padding: 0.7rem 1rem;
       border-radius: 8px;
       margin-top: 1rem;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #64748b;
-      margin-top: 1.5rem;
     }
   </style>
 </head>
@@ -151,75 +174,87 @@
         const data = await response.json();
         console.log("✅ Parsed JSON from backend:", data);
 
-        // Clear result and build grouped layout
         resultDiv.innerHTML = "";
 
-        // Section 1 — Policyholder
+        // Helper functions
+        const listItems = (arr) => arr && arr.length ? `<ul>${arr.map(i => `<li>${i}</li>`).join('')}</ul>` : "N/A";
+        const tableRows = (arr, cols) => arr && arr.length ? `
+          <table>
+            <tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr>
+            ${arr.map(o => `<tr>${cols.map(c => `<td>${o[c.toLowerCase()] ?? ''}</td>`).join('')}</tr>`).join('')}
+          </table>
+        ` : "N/A";
+
+        // --- Policyholder ---
         resultDiv.innerHTML += `
           <div class="section">
             <h3>👤 Policyholder Details</h3>
-            <div class="field"><strong>Name:</strong> ${data.policyholder_name ?? "N/A"}</div>
-            <div class="field"><strong>Date of Birth:</strong> ${data.date_of_birth ?? "N/A"}</div>
-            <div class="field"><strong>Occupation:</strong> ${data.occupation ?? "N/A"}</div>
-            <div class="field"><strong>Marital Status:</strong> ${data.marital_status ?? "N/A"}</div>
-            <div class="field"><strong>Insurer:</strong> ${data.insurer_name ?? "N/A"}</div>
-            <div class="field"><strong>Policy Number:</strong> ${data.policy_number ?? "N/A"}</div>
-            <div class="field"><strong>Start Date:</strong> ${data.start_date ?? "N/A"}</div>
-            <div class="field"><strong>End Date:</strong> ${data.end_date ?? "N/A"}</div>
+            <div><strong>Name:</strong> ${data.policyholder_name ?? "N/A"}</div>
+            <div><strong>Date of Birth:</strong> ${data.date_of_birth ?? "N/A"}</div>
+            <div><strong>Occupation:</strong> ${data.occupation ?? "N/A"}</div>
+            <div><strong>Marital Status:</strong> ${data.marital_status ?? "N/A"}</div>
+            <div><strong>Insurer:</strong> ${data.insurer_name ?? "N/A"}</div>
+            <div><strong>Policy Number:</strong> ${data.policy_number ?? "N/A"}</div>
+            <div><strong>Start Date:</strong> ${data.start_date ?? "N/A"}</div>
+            <div><strong>End Date:</strong> ${data.end_date ?? "N/A"}</div>
           </div>
         `;
 
-        // Section 2 — Property
+        // --- Property ---
         resultDiv.innerHTML += `
           <div class="section">
             <h3>🏠 Property Details</h3>
-            <div class="field"><strong>Address:</strong> ${data.address ?? "N/A"}</div>
-            <div class="field"><strong>Postcode:</strong> ${data.postcode ?? "N/A"}</div>
-            <div class="field"><strong>Type:</strong> ${data.property_type ?? "N/A"}</div>
-            <div class="field"><strong>Bedrooms:</strong> ${data.bedrooms ?? "N/A"}</div>
-            <div class="field"><strong>Bathrooms:</strong> ${data.bathrooms ?? "N/A"}</div>
-            <div class="field"><strong>Year Built:</strong> ${data.year_built ?? "N/A"}</div>
-            <div class="field"><strong>Construction:</strong> ${data.construction_type ?? "N/A"}</div>
-            <div class="field"><strong>Roof Type:</strong> ${data.roof_type ?? "N/A"}</div>
-            <div class="field"><strong>Flat Roof %:</strong> ${data.flat_roof_percentage ?? "N/A"}</div>
-            <div class="field"><strong>Listed Status:</strong> ${data.listed_status ?? "N/A"}</div>
-            <div class="field"><strong>Occupancy:</strong> ${data.occupancy_type ?? "N/A"}</div>
-            <div class="field"><strong>Security Features:</strong> <pre>${JSON.stringify(data.security_features, null, 2)}</pre></div>
+            <div><strong>Address:</strong> ${data.address ?? "N/A"}</div>
+            <div><strong>Postcode:</strong> ${data.postcode ?? "N/A"}</div>
+            <div><strong>Type:</strong> ${data.property_type ?? "N/A"}</div>
+            <div><strong>Bedrooms:</strong> ${data.bedrooms ?? "N/A"}</div>
+            <div><strong>Bathrooms:</strong> ${data.bathrooms ?? "N/A"}</div>
+            <div><strong>Year Built:</strong> ${data.year_built ?? "N/A"}</div>
+            <div><strong>Construction:</strong> ${data.construction_type ?? "N/A"}</div>
+            <div><strong>Roof Type:</strong> ${data.roof_type ?? "N/A"}</div>
+            <div><strong>Flat Roof %:</strong> ${data.flat_roof_percentage ?? "N/A"}</div>
+            <div><strong>Listed Status:</strong> ${data.listed_status ?? "N/A"}</div>
+            <div><strong>Occupancy:</strong> ${data.occupancy_type ?? "N/A"}</div>
+            <div><strong>Security Features:</strong> ${listItems(data.security_features)}</div>
           </div>
         `;
 
-        // Section 3 — Covers
+        // --- Covers ---
         resultDiv.innerHTML += `
           <div class="section">
             <h3>🛡️ Cover Details</h3>
-            <div class="field"><strong>Buildings Sum Insured:</strong> £${data.buildings_sum_insured ?? "N/A"}</div>
-            <div class="field"><strong>Contents Sum Insured:</strong> £${data.contents_sum_insured ?? "N/A"}</div>
-            <div class="field"><strong>Accidental Damage:</strong> ${data.accidental_damage_cover ?? "N/A"}</div>
-            <div class="field"><strong>Legal Expenses:</strong> ${data.legal_expenses_cover ?? "N/A"}</div>
-            <div class="field"><strong>Personal Possessions:</strong> ${data.personal_possessions_cover ?? "N/A"}</div>
-            <div class="field"><strong>Home Emergency:</strong> ${data.home_emergency_cover ?? "N/A"}</div>
+            <div><strong>Buildings Sum Insured:</strong> £${data.buildings_sum_insured ?? "N/A"}</div>
+            <div><strong>Contents Sum Insured:</strong> £${data.contents_sum_insured ?? "N/A"}</div>
+            <div><strong>Accidental Damage:</strong> ${data.accidental_damage_cover ?? "N/A"}</div>
+            <div><strong>Legal Expenses:</strong> ${data.legal_expenses_cover ?? "N/A"}</div>
+            <div><strong>Personal Possessions:</strong> ${data.personal_possessions_cover ?? "N/A"}</div>
+            <div><strong>Home Emergency:</strong> ${data.home_emergency_cover ?? "N/A"}</div>
           </div>
         `;
 
-        // Section 4 — Financials
+        // --- Financials ---
         resultDiv.innerHTML += `
           <div class="section">
             <h3>💷 Financials & Excesses</h3>
-            <div class="field"><strong>Renewal Premium:</strong> £${data.renewal_premium ?? "N/A"}</div>
-            <div class="field"><strong>Standard Excess:</strong> £${data.excess_standard ?? "N/A"}</div>
-            <div class="field"><strong>Voluntary Excess:</strong> £${data.excess_voluntary ?? "N/A"}</div>
-            <div class="field"><strong>No Claims Discount:</strong> ${data.no_claims_discount_years ?? "N/A"}</div>
-            <div class="field"><strong>Previous Claims:</strong> <pre>${JSON.stringify(data.previous_claims, null, 2)}</pre></div>
+            <div><strong>Renewal Premium:</strong> £${data.renewal_premium ?? "N/A"}</div>
+            <h4>Excesses:</h4>
+            <table>
+              <tr><th></th><th>Buildings</th><th>Contents</th></tr>
+              <tr><td>Voluntary</td><td>£${data.excess_voluntary ?? "N/A"}</td><td>£${data.excess_voluntary ?? "N/A"}</td></tr>
+              <tr><td>Compulsory</td><td>£${data.excess_standard ?? "N/A"}</td><td>£${data.excess_standard ?? "N/A"}</td></tr>
+            </table>
+            <div><strong>No Claims Discount:</strong> ${data.no_claims_discount_years ?? "N/A"}</div>
+            <div><strong>Previous Claims:</strong> ${tableRows(data.previous_claims, ["Date", "Type", "Amount"])}</div>
           </div>
         `;
 
-        // Section 5 — Endorsements
+        // --- Endorsements & Exclusions ---
         resultDiv.innerHTML += `
           <div class="section">
             <h3>⚠️ Endorsements & Exclusions</h3>
-            <div class="field"><strong>Specified Items:</strong> <pre>${JSON.stringify(data.specified_items, null, 2)}</pre></div>
-            <div class="field"><strong>Endorsements:</strong> <pre>${JSON.stringify(data.endorsements, null, 2)}</pre></div>
-            <div class="field"><strong>Exclusions:</strong> <pre>${JSON.stringify(data.exclusions, null, 2)}</pre></div>
+            <div><strong>Specified Items:</strong> ${tableRows(data.specified_items, ["Item", "Value"])}</div>
+            <div><strong>Endorsements:</strong> ${listItems(data.endorsements)}</div>
+            <div><strong>Exclusions:</strong> ${listItems(data.exclusions)}</div>
           </div>
         `;
 
