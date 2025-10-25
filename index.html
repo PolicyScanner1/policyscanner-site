@@ -181,7 +181,7 @@
         const tableRows = (arr, cols) => arr && arr.length ? `
           <table>
             <tr>${cols.map(c => `<th>${c}</th>`).join('')}</tr>
-            ${arr.map(o => `<tr>${cols.map(c => `<td>${o[c.toLowerCase()] ?? ''}</td>`).join('')}</tr>`).join('')}
+            ${arr.map(o => `<tr>${cols.map(c => `<td>${o[c.toLowerCase().replace(/ /g, "_")] ?? ""}</td>`).join('')}</tr>`).join('')}
           </table>
         ` : "N/A";
 
@@ -240,10 +240,16 @@
             <h4>Excesses:</h4>
             <table>
               <tr><th></th><th>Buildings</th><th>Contents</th></tr>
-              <tr><td>Voluntary</td><td>£${data.excess_voluntary ?? "N/A"}</td><td>£${data.excess_voluntary ?? "N/A"}</td></tr>
-              <tr><td>Compulsory</td><td>£${data.excess_standard ?? "N/A"}</td><td>£${data.excess_standard ?? "N/A"}</td></tr>
+              <tr><td>Voluntary</td><td>£${data.buildings_excess_voluntary ?? data.excess_voluntary ?? "N/A"}</td><td>£${data.contents_excess_voluntary ?? data.excess_voluntary ?? "N/A"}</td></tr>
+              <tr><td>Compulsory</td><td>£${data.buildings_excess_compulsory ?? data.excess_standard ?? "N/A"}</td><td>£${data.contents_excess_compulsory ?? data.excess_standard ?? "N/A"}</td></tr>
             </table>
-            <div><strong>No Claims Discount:</strong> ${data.no_claims_discount_years ?? "N/A"}</div>
+
+            <h4>No Claims Discount:</h4>
+            <table>
+              <tr><th></th><th>Buildings</th><th>Contents</th></tr>
+              <tr><td>Years</td><td>${data.buildings_ncd_years ?? data.no_claims_discount_years ?? "N/A"}</td><td>${data.contents_ncd_years ?? data.no_claims_discount_years ?? "N/A"}</td></tr>
+            </table>
+
             <div><strong>Previous Claims:</strong> ${tableRows(data.previous_claims, ["Date", "Type", "Amount"])}</div>
           </div>
         `;
@@ -252,7 +258,18 @@
         resultDiv.innerHTML += `
           <div class="section">
             <h3>⚠️ Endorsements & Exclusions</h3>
-            <div><strong>Specified Items:</strong> ${tableRows(data.specified_items, ["Item", "Value"])}</div>
+            <div><strong>Specified Items:</strong>
+              ${data.specified_items && data.specified_items.length ? `
+              <table>
+                <tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
+                ${data.specified_items.map(i => `
+                  <tr>
+                    <td>${i.item ?? "N/A"}</td>
+                    <td>£${i.value ?? "N/A"}</td>
+                    <td>${i.covered_away ?? "N/A"}</td>
+                  </tr>`).join('')}
+              </table>` : "N/A"}
+            </div>
             <div><strong>Endorsements:</strong> ${listItems(data.endorsements)}</div>
             <div><strong>Exclusions:</strong> ${listItems(data.exclusions)}</div>
           </div>
