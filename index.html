@@ -126,11 +126,40 @@
       border-radius: 12px;
       padding: 1.5rem;
       margin-top: 2rem;
-      max-height: 500px;
-      overflow-y: auto;
-      font-family: monospace;
-      white-space: pre-wrap;
-      word-break: break-word;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    .section {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .section h4 {
+      color: #2563eb;
+      margin-bottom: 0.7rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 0.5rem;
+    }
+
+    td {
+      padding: 6px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+
+    td:first-child {
+      font-weight: 600;
+      width: 40%;
+      color: #334155;
+    }
+
+    .subtable td:first-child {
+      width: 60%;
     }
 
     footer {
@@ -194,66 +223,105 @@
         });
 
         const data = await response.json();
-
-        // Create formatted display
-        const display = `
-📋 **Policyholder:** ${data.policyholder_name || "N/A"}
-🏢 **Insurer:** ${data.insurer_name || "N/A"}
-📄 **Policy Number:** ${data.policy_number || "N/A"}
-📅 **Start Date:** ${data.start_date || "N/A"}
-📅 **End Date:** ${data.end_date || "N/A"}
-💷 **Renewal Premium:** £${data.renewal_premium || "N/A"}
-
-🏠 **Property Details**
-  Address: ${data.address || "N/A"}
-  Postcode: ${data.postcode || "N/A"}
-  Type: ${data.property_type || "N/A"}
-  Bedrooms: ${data.bedrooms || "N/A"}
-  Bathrooms: ${data.bathrooms || "N/A"}
-  Year Built: ${data.year_built || "N/A"}
-  Construction: ${data.construction_type || "N/A"}
-  Roof: ${data.roof_type || "N/A"}
-  Flat Roof: ${data.flat_roof_percentage || "N/A"}%
-  Listed Status: ${data.listed_status || "N/A"}
-
-🧾 **Covers**
-  Buildings Sum Insured: £${data.buildings_sum_insured || "N/A"}
-  Contents Sum Insured: £${data.contents_sum_insured || "N/A"}
-  Accidental Damage: ${data.accidental_damage_cover || "N/A"}
-  Legal Expenses: ${data.legal_expenses_cover || "N/A"}
-  Personal Possessions: ${data.personal_possessions_cover || "N/A"}
-  Home Emergency: ${data.home_emergency_cover || "N/A"}
-
-💰 **Excesses**
-  Standard: £${data.excess_standard || "N/A"}
-  Voluntary: £${data.excess_voluntary || "N/A"}
-
-⚙️ **Specified Items**
-  ${(data.specified_items || [])
-    .map((i) => `- ${i.item} (£${i.value})`)
-    .join("\n") || "None"}
-
-🧯 **Security Features**
-  ${(data.security_features || []).join(", ") || "N/A"}
-
-📉 **Previous Claims**
-  ${(data.previous_claims || [])
-    .map((c) => `${c.type} (£${c.amount}) - ${c.date}`)
-    .join("\n") || "None"}
-
-📜 **Endorsements**
-  ${(data.endorsements || []).join("\n") || "None"}
-
-🚫 **Exclusions**
-  ${(data.exclusions || []).join("\n") || "None"}
-`;
-
-        resultDiv.textContent = display.trim();
+        resultDiv.innerHTML = formatResult(data);
       } catch (err) {
         resultDiv.innerHTML = "<span style='color:red'>Error: " + err.message + "</span>";
       }
     }
+
+    function tableRow(label, value) {
+      if (!value || value === "null") return "";
+      return `<tr><td>${label}</td><td>${value}</td></tr>`;
+    }
+
+    function formatResult(data) {
+      return `
+        <div class="section">
+          <h4>📋 Policy Details</h4>
+          <table>
+            ${tableRow("Policyholder", data.policyholder_name)}
+            ${tableRow("Insurer", data.insurer_name)}
+            ${tableRow("Policy Number", data.policy_number)}
+            ${tableRow("Start Date", data.start_date)}
+            ${tableRow("End Date", data.end_date)}
+            ${tableRow("Renewal Premium", "£" + data.renewal_premium)}
+          </table>
+        </div>
+
+        <div class="section">
+          <h4>🏠 Property Details</h4>
+          <table>
+            ${tableRow("Address", data.address)}
+            ${tableRow("Postcode", data.postcode)}
+            ${tableRow("Type", data.property_type)}
+            ${tableRow("Bedrooms", data.bedrooms)}
+            ${tableRow("Bathrooms", data.bathrooms)}
+            ${tableRow("Year Built", data.year_built)}
+            ${tableRow("Construction", data.construction_type)}
+            ${tableRow("Roof Type", data.roof_type)}
+            ${tableRow("Flat Roof %", data.flat_roof_percentage)}
+            ${tableRow("Listed Status", data.listed_status)}
+            ${tableRow("Occupancy Type", data.occupancy_type)}
+          </table>
+        </div>
+
+        <div class="section">
+          <h4>🧾 Cover Breakdown</h4>
+          <table>
+            ${tableRow("Buildings Sum Insured", "£" + data.buildings_sum_insured)}
+            ${tableRow("Contents Sum Insured", "£" + data.contents_sum_insured)}
+            ${tableRow("Accidental Damage", data.accidental_damage_cover)}
+            ${tableRow("Legal Expenses", data.legal_expenses_cover)}
+            ${tableRow("Personal Possessions", data.personal_possessions_cover)}
+            ${tableRow("Home Emergency", data.home_emergency_cover)}
+          </table>
+        </div>
+
+        <div class="section">
+          <h4>💰 Excesses</h4>
+          <table>
+            ${tableRow("Standard Excess", "£" + data.excess_standard)}
+            ${tableRow("Voluntary Excess", "£" + data.excess_voluntary)}
+          </table>
+        </div>
+
+        <div class="section">
+          <h4>💎 Specified Items</h4>
+          ${
+            data.specified_items?.length
+              ? `<table>${data.specified_items.map(i => tableRow(i.item, "£" + i.value)).join("")}</table>`
+              : "None listed."
+          }
+        </div>
+
+        <div class="section">
+          <h4>📉 Previous Claims</h4>
+          ${
+            data.previous_claims?.length
+              ? `<table>${data.previous_claims.map(c => tableRow(c.type, "£" + c.amount + " (" + c.date + ")")).join("")}</table>`
+              : "None reported."
+          }
+        </div>
+
+        <div class="section">
+          <h4>📜 Endorsements</h4>
+          ${
+            data.endorsements?.length
+              ? `<ul>${data.endorsements.map(e => `<li>${e}</li>`).join("")}</ul>`
+              : "No special endorsements."
+          }
+        </div>
+
+        <div class="section">
+          <h4>🚫 Exclusions</h4>
+          ${
+            data.exclusions?.length
+              ? `<ul>${data.exclusions.map(e => `<li>${e}</li>`).join("")}</ul>`
+              : "No exclusions listed."
+          }
+        </div>
+      `;
+    }
   </script>
 </body>
 </html>
-
