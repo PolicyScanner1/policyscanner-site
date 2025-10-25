@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PolicyScanner | AI Document Intelligence</title>
+  <title>PolicyScanner | Smarter Home Insurance Comparison</title>
   <style>
     body {
       font-family: "Inter", system-ui, sans-serif;
@@ -25,7 +25,7 @@
     }
 
     header h1 {
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       color: #2563eb;
       font-weight: 700;
     }
@@ -37,34 +37,26 @@
       font-weight: 500;
       transition: color 0.2s;
     }
-
-    nav a:hover {
-      color: #1d4ed8;
-    }
+    nav a:hover { color: #1d4ed8; }
 
     .hero {
       text-align: center;
-      padding: 6rem 2rem 3rem 2rem;
+      padding: 6rem 2rem 4rem;
       background: linear-gradient(to bottom right, #2563eb, #1e3a8a);
       color: white;
     }
 
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
+    .hero h2 { font-size: 2.7rem; margin-bottom: 1rem; }
     .hero p {
       font-size: 1.1rem;
       color: #e0e7ff;
-      max-width: 600px;
-      margin: 0 auto 2rem auto;
+      max-width: 620px;
+      margin: 0 auto 2rem;
     }
-
     .hero button {
-      background: #ffffff;
+      background: #fff;
       color: #1e3a8a;
-      padding: 0.8rem 1.6rem;
+      padding: 0.9rem 1.7rem;
       border: none;
       border-radius: 8px;
       font-weight: 600;
@@ -72,10 +64,7 @@
       cursor: pointer;
       transition: background 0.2s ease;
     }
-
-    .hero button:hover {
-      background: #e2e8f0;
-    }
+    .hero button:hover { background: #e2e8f0; }
 
     .demo-section {
       display: flex;
@@ -95,15 +84,8 @@
       text-align: center;
     }
 
-    .upload-card h3 {
-      margin-bottom: 1rem;
-      color: #1e40af;
-    }
-
-    input[type="file"] {
-      margin: 1rem 0;
-    }
-
+    .upload-card h3 { margin-bottom: 1rem; color: #1e40af; }
+    input[type="file"] { margin: 1rem 0; }
     button.upload {
       background: #2563eb;
       color: #fff;
@@ -114,22 +96,14 @@
       font-size: 1rem;
       transition: background 0.2s ease;
     }
-
-    button.upload:hover {
-      background: #1d4ed8;
-    }
+    button.upload:hover { background: #1d4ed8; }
 
     .features {
       background: #f1f5f9;
       padding: 4rem 1rem;
       text-align: center;
     }
-
-    .features h2 {
-      color: #1e40af;
-      margin-bottom: 2rem;
-    }
-
+    .features h2 { color: #1e40af; margin-bottom: 2rem; }
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -137,46 +111,27 @@
       max-width: 1000px;
       margin: 0 auto;
     }
-
     .feature {
       background: white;
       padding: 2rem;
       border-radius: 12px;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     }
+    .feature h3 { color: #2563eb; margin-bottom: 0.5rem; }
 
-    .feature h3 {
-      color: #2563eb;
-      margin-bottom: 0.5rem;
-    }
-
-    .integrations {
-      padding: 4rem 1rem;
+    .contact {
       text-align: center;
+      padding: 3rem 1rem 4rem;
+      background: #fff;
     }
-
-    .integrations h2 {
-      color: #1e40af;
-      margin-bottom: 1.5rem;
+    .contact h2 { color: #1e40af; margin-bottom: 0.5rem; }
+    .contact a {
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
     }
-
-    .logo-row {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-      opacity: 0.9;
-    }
-
-    .logo-row img {
-      height: 40px;
-      filter: grayscale(100%);
-      transition: filter 0.2s;
-    }
-
-    .logo-row img:hover {
-      filter: none;
-    }
+    .contact a:hover { text-decoration: underline; }
 
     footer {
       text-align: center;
@@ -192,63 +147,58 @@
     <h1>PolicyScanner</h1>
     <nav>
       <a href="#features">Features</a>
-      <a href="#integrations">Integrations</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#demo">Demo</a>
+      <a href="#demo">Compare</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <section class="hero">
-    <h2>Extract Key Policy Data in Seconds</h2>
-    <p>Upload insurance documents, and our AI automatically parses, structures, and exports your data into CRMs, spreadsheets, and databases.</p>
-    <button onclick="document.getElementById('fileInput').scrollIntoView({ behavior: 'smooth' })">Try the Demo ↓</button>
+    <h2>Smarter Home Insurance Comparison</h2>
+    <p>PolicyScanner analyses your current insurance documents using AI, helping you instantly see if you’re overpaying or under-covered — without the jargon or hidden fees.</p>
+    <button onclick="document.getElementById('fileInput').scrollIntoView({ behavior: 'smooth' })">Try It Now ↓</button>
   </section>
 
   <section class="demo-section" id="demo">
     <div class="upload-card">
-      <h3>Upload a Policy Document</h3>
+      <h3>Upload Your Renewal or Policy Document</h3>
+      <p style="color:#475569;">We’ll analyse your cover and compare against top UK insurers.</p>
       <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
       <br />
-      <button class="upload" onclick="uploadFile()">Upload</button>
+      <button class="upload" onclick="uploadFile()">Upload & Compare</button>
       <div id="result"></div>
     </div>
   </section>
 
   <section class="features" id="features">
-    <h2>Why PolicyScanner?</h2>
+    <h2>Why Choose PolicyScanner?</h2>
     <div class="feature-grid">
       <div class="feature">
-        <h3>⚡ Instant Data Extraction</h3>
-        <p>Upload any document, and our AI instantly identifies and extracts policy details with high accuracy.</p>
+        <h3>💡 True Cover Comparison</h3>
+        <p>We don’t just look for the cheapest deal — we match on cover level, excesses, and add-ons, ensuring you’re genuinely protected.</p>
       </div>
       <div class="feature">
-        <h3>📊 Integrates Everywhere</h3>
-        <p>Send parsed data directly to Google Sheets, CRMs, SQL databases, or your internal systems via API.</p>
+        <h3>⚡ Instant Insights</h3>
+        <p>Upload your renewal PDF or photo and get an instant breakdown of your policy’s strengths and gaps.</p>
       </div>
       <div class="feature">
-        <h3>🔒 Secure & Compliant</h3>
-        <p>All files are encrypted and deleted after processing, ensuring GDPR and ISO-27001 level data security.</p>
+        <h3>🔍 Transparent Pricing</h3>
+        <p>See exactly where your premium goes and how competitors compare — no hidden broker fees or upsells.</p>
       </div>
       <div class="feature">
-        <h3>🤖 AI Optimized</h3>
-        <p>Fine-tuned on thousands of real policy formats to ensure accuracy across all major UK insurers.</p>
+        <h3>🏦 Trusted Insurers</h3>
+        <p>We work with top UK insurers and MGAs to ensure accurate comparisons and verified data.</p>
       </div>
     </div>
   </section>
 
-  <section class="integrations" id="integrations">
-    <h2>Works Seamlessly With</h2>
-    <div class="logo-row">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Google_Sheets_logo.svg" alt="Sheets" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Salesforce_logo.svg" alt="Salesforce" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/HubSpot_Logo.svg" alt="HubSpot" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Microsoft_SQL_Server_Logo.svg" alt="SQL" />
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Api_icon.svg" alt="API" />
-    </div>
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p>For partnership or media enquiries, reach us at:</p>
+    <a href="mailto:hello@policyscanner.co.uk">hello@policyscanner.co.uk</a>
   </section>
 
   <footer>
-    © 2025 PolicyScanner — AI for insurance data automation.
+    © 2025 PolicyScanner — Building trust through transparency in insurance.
   </footer>
 
   <script>
@@ -258,7 +208,7 @@
       const file = fileInput.files[0];
       if (!file) return alert("Please select a file first.");
 
-      resultDiv.innerHTML = "<em>Processing your document...</em> ⏳";
+      resultDiv.innerHTML = "<em>Analysing your document...</em> ⏳";
 
       const formData = new FormData();
       formData.append("file", file);
@@ -270,7 +220,7 @@
         });
 
         const data = await response.json();
-        resultDiv.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
+        resultDiv.innerHTML = "<h4>📋 Analysis Result</h4><pre>" + JSON.stringify(data, null, 2) + "</pre>";
       } catch (err) {
         resultDiv.innerHTML = "<span style='color:red'>Error: " + err.message + "</span>";
       }
