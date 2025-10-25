@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PolicyScanner</title>
+
   <style>
     body {
       font-family: "Inter", system-ui, sans-serif;
@@ -17,19 +18,14 @@
       min-height: 100vh;
     }
 
-    .box {
+    .container {
       background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       padding: 2.5rem;
-      width: 90%;
-      max-width: 650px;
+      width: 95%;
+      max-width: 850px;
       text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .box:hover {
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
@@ -38,18 +34,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
     }
 
     h1::before {
       content: "📄";
-      font-size: 1.8rem;
     }
 
     p {
       color: #475569;
       font-size: 1rem;
-      margin-bottom: 1.5rem;
     }
 
     input[type="file"] {
@@ -58,37 +52,56 @@
 
     button {
       background: #2563eb;
-      color: white;
+      color: #fff;
       border: none;
       padding: 0.7rem 1.6rem;
       border-radius: 8px;
       cursor: pointer;
       font-size: 1rem;
       font-weight: 500;
-      transition: all 0.2s;
+      transition: background 0.2s ease;
     }
 
     button:hover {
       background: #1d4ed8;
     }
 
-    #result {
-      margin-top: 1.5rem;
+    .section {
       text-align: left;
       background: #f1f5f9;
-      border-radius: 12px;
-      padding: 1.2rem 1.5rem;
-      font-size: 0.95rem;
+      border-radius: 10px;
+      padding: 1.2rem 1.4rem;
+      margin-top: 1.3rem;
+    }
+
+    .section h3 {
+      color: #1e40af;
+      border-bottom: 2px solid #3b82f6;
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .field {
+      margin: 0.3rem 0;
+    }
+
+    .field strong {
       color: #1e293b;
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
     }
 
     pre {
       background: #e2e8f0;
-      padding: 0.5rem;
-      border-radius: 8px;
+      padding: 0.6rem;
+      border-radius: 6px;
       overflow-x: auto;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
     }
 
     .footer {
@@ -97,21 +110,13 @@
       color: #64748b;
       margin-top: 1.5rem;
     }
-
-    .error {
-      background: #fee2e2;
-      color: #991b1b;
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      margin-top: 1rem;
-    }
   </style>
 </head>
 
 <body>
-  <div class="box">
+  <div class="container">
     <h1>PolicyScanner</h1>
-    <p>Upload your home insurance renewal document to extract key details automatically.</p>
+    <p>Upload your insurance document to extract key policy details automatically.</p>
 
     <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
     <br />
@@ -143,28 +148,83 @@
         });
 
         if (!response.ok) throw new Error("Upload failed.");
-
         const data = await response.json();
-        console.log("✅ Parsed JSON:", data);
+        console.log("✅ Parsed JSON from backend:", data);
 
-        resultDiv.innerHTML = `<h3>Extracted Policy Details</h3>`;
+        // Clear result and build grouped layout
+        resultDiv.innerHTML = "";
 
-        // Display every key/value dynamically
-        const entries = Object.entries(data);
-        if (!entries.length) {
-          resultDiv.innerHTML = "<div class='error'>No data found in response.</div>";
-          return;
-        }
+        // Section 1 — Policyholder
+        resultDiv.innerHTML += `
+          <div class="section">
+            <h3>👤 Policyholder Details</h3>
+            <div class="field"><strong>Name:</strong> ${data.policyholder_name ?? "N/A"}</div>
+            <div class="field"><strong>Date of Birth:</strong> ${data.date_of_birth ?? "N/A"}</div>
+            <div class="field"><strong>Occupation:</strong> ${data.occupation ?? "N/A"}</div>
+            <div class="field"><strong>Marital Status:</strong> ${data.marital_status ?? "N/A"}</div>
+            <div class="field"><strong>Insurer:</strong> ${data.insurer_name ?? "N/A"}</div>
+            <div class="field"><strong>Policy Number:</strong> ${data.policy_number ?? "N/A"}</div>
+            <div class="field"><strong>Start Date:</strong> ${data.start_date ?? "N/A"}</div>
+            <div class="field"><strong>End Date:</strong> ${data.end_date ?? "N/A"}</div>
+          </div>
+        `;
 
-        entries.forEach(([key, value]) => {
-          if (typeof value === "object" && value !== null) {
-            resultDiv.innerHTML += `<p><strong>${key}</strong>:<br><pre>${JSON.stringify(value, null, 2)}</pre></p>`;
-          } else {
-            resultDiv.innerHTML += `<p><strong>${key}</strong>: ${value ?? "N/A"}</p>`;
-          }
-        });
+        // Section 2 — Property
+        resultDiv.innerHTML += `
+          <div class="section">
+            <h3>🏠 Property Details</h3>
+            <div class="field"><strong>Address:</strong> ${data.address ?? "N/A"}</div>
+            <div class="field"><strong>Postcode:</strong> ${data.postcode ?? "N/A"}</div>
+            <div class="field"><strong>Type:</strong> ${data.property_type ?? "N/A"}</div>
+            <div class="field"><strong>Bedrooms:</strong> ${data.bedrooms ?? "N/A"}</div>
+            <div class="field"><strong>Bathrooms:</strong> ${data.bathrooms ?? "N/A"}</div>
+            <div class="field"><strong>Year Built:</strong> ${data.year_built ?? "N/A"}</div>
+            <div class="field"><strong>Construction:</strong> ${data.construction_type ?? "N/A"}</div>
+            <div class="field"><strong>Roof Type:</strong> ${data.roof_type ?? "N/A"}</div>
+            <div class="field"><strong>Flat Roof %:</strong> ${data.flat_roof_percentage ?? "N/A"}</div>
+            <div class="field"><strong>Listed Status:</strong> ${data.listed_status ?? "N/A"}</div>
+            <div class="field"><strong>Occupancy:</strong> ${data.occupancy_type ?? "N/A"}</div>
+            <div class="field"><strong>Security Features:</strong> <pre>${JSON.stringify(data.security_features, null, 2)}</pre></div>
+          </div>
+        `;
+
+        // Section 3 — Covers
+        resultDiv.innerHTML += `
+          <div class="section">
+            <h3>🛡️ Cover Details</h3>
+            <div class="field"><strong>Buildings Sum Insured:</strong> £${data.buildings_sum_insured ?? "N/A"}</div>
+            <div class="field"><strong>Contents Sum Insured:</strong> £${data.contents_sum_insured ?? "N/A"}</div>
+            <div class="field"><strong>Accidental Damage:</strong> ${data.accidental_damage_cover ?? "N/A"}</div>
+            <div class="field"><strong>Legal Expenses:</strong> ${data.legal_expenses_cover ?? "N/A"}</div>
+            <div class="field"><strong>Personal Possessions:</strong> ${data.personal_possessions_cover ?? "N/A"}</div>
+            <div class="field"><strong>Home Emergency:</strong> ${data.home_emergency_cover ?? "N/A"}</div>
+          </div>
+        `;
+
+        // Section 4 — Financials
+        resultDiv.innerHTML += `
+          <div class="section">
+            <h3>💷 Financials & Excesses</h3>
+            <div class="field"><strong>Renewal Premium:</strong> £${data.renewal_premium ?? "N/A"}</div>
+            <div class="field"><strong>Standard Excess:</strong> £${data.excess_standard ?? "N/A"}</div>
+            <div class="field"><strong>Voluntary Excess:</strong> £${data.excess_voluntary ?? "N/A"}</div>
+            <div class="field"><strong>No Claims Discount:</strong> ${data.no_claims_discount_years ?? "N/A"}</div>
+            <div class="field"><strong>Previous Claims:</strong> <pre>${JSON.stringify(data.previous_claims, null, 2)}</pre></div>
+          </div>
+        `;
+
+        // Section 5 — Endorsements
+        resultDiv.innerHTML += `
+          <div class="section">
+            <h3>⚠️ Endorsements & Exclusions</h3>
+            <div class="field"><strong>Specified Items:</strong> <pre>${JSON.stringify(data.specified_items, null, 2)}</pre></div>
+            <div class="field"><strong>Endorsements:</strong> <pre>${JSON.stringify(data.endorsements, null, 2)}</pre></div>
+            <div class="field"><strong>Exclusions:</strong> <pre>${JSON.stringify(data.exclusions, null, 2)}</pre></div>
+          </div>
+        `;
 
       } catch (err) {
+        console.error(err);
         resultDiv.innerHTML = `<div class="error">Error: ${err.message}</div>`;
       }
     }
