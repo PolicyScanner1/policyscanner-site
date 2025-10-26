@@ -24,19 +24,8 @@
       z-index: 10;
     }
 
-    header h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #2563eb;
-    }
-
-    nav a {
-      margin-left: 1.5rem;
-      color: #334155;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
+    header h1 { font-size: 1.4rem; font-weight: 700; color: #2563eb; }
+    nav a { margin-left: 1.5rem; color: #334155; text-decoration: none; font-weight: 500; }
     nav a:hover { color: #1d4ed8; }
 
     /* Hero */
@@ -98,22 +87,9 @@
       color: #f1f5f9;
     }
 
-    .feature span {
-      font-size: 1.8rem;
-      display: block;
-      margin-bottom: 0.3rem;
-    }
-
-    .feature h4 {
-      margin: 0.4rem 0 0.3rem;
-      color: white;
-    }
-
-    .feature p {
-      font-size: 0.95rem;
-      color: #cbd5e1;
-      line-height: 1.4;
-    }
+    .feature span { font-size: 1.8rem; display: block; margin-bottom: 0.3rem; }
+    .feature h4 { margin: 0.4rem 0 0.3rem; color: white; }
+    .feature p { font-size: 0.95rem; color: #cbd5e1; line-height: 1.4; }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -121,153 +97,71 @@
     }
 
     /* Upload Section */
-    .container {
-      display: flex;
-      justify-content: center;
-      margin-top: -1.5rem;
-      padding: 2rem;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      padding: 2rem;
-      max-width: 950px;
-      width: 100%;
-    }
-
-    .upload-area {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
+    .container { display: flex; justify-content: center; margin-top: -1.5rem; padding: 2rem; }
+    .card { background: #fff; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 2rem; max-width: 950px; width: 100%; }
+    .upload-area { text-align: center; margin-bottom: 1.5rem; }
 
     .custom-file-upload {
-      background: #2563eb;
-      color: white;
-      padding: 0.8rem 1.4rem;
-      border-radius: 8px;
-      font-weight: 600;
-      display: inline-block;
-      cursor: pointer;
-      transition: background 0.2s ease;
-      margin-right: 0.5rem;
+      background: #2563eb; color: white; padding: 0.8rem 1.4rem; border-radius: 8px; font-weight: 600;
+      display: inline-block; cursor: pointer; transition: background 0.2s ease; margin-right: 0.5rem;
     }
     .custom-file-upload:hover { background: #1d4ed8; }
     input[type="file"] { display: none; }
-
     button.upload {
-      background: #1e3a8a;
-      color: white;
-      border: none;
-      padding: 0.8rem 1.4rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
+      background: #1e3a8a; color: white; border: none; padding: 0.8rem 1.4rem;
+      border-radius: 8px; font-weight: 600; cursor: pointer;
     }
     button.upload:hover { background: #172554; }
 
-    /* ===== Results formatting ===== */
-    .section {
-      background: #f1f5f9;
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin: 1rem 0;
-    }
-
-    .section h4 {
-      color: #1e3a8a;
-      margin-bottom: 0.6rem;
-      border-bottom: 2px solid #2563eb;
-      display: inline-block;
-      padding-bottom: 0.2rem;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.5rem;
-    }
-
-    th, td {
-      padding: 0.6rem 0.5rem;
-      border: 1px solid #e2e8f0;
-      text-align: left;
-    }
-
+    /* Sections */
+    .section { background: #f1f5f9; border-radius: 12px; padding: 1.5rem; margin: 1rem 0; }
+    .section h4 { color: #1e3a8a; margin-bottom: 0.6rem; border-bottom: 2px solid #2563eb; display: inline-block; padding-bottom: 0.2rem; }
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+    th, td { padding: 0.6rem 0.5rem; border: 1px solid #e2e8f0; text-align: left; }
     th { background: #f8fafc; color: #1e3a8a; }
     td:first-child { font-weight: 500; color: #334155; }
-
     ul { margin: 0.4rem 0 0.6rem 1.2rem; color: #0f172a; }
 
-    /* Blue dividers between sections */
-    .section b {
-      display: block;
-      margin-top: 1rem;
-      margin-bottom: 0.3rem;
-      font-weight: 600;
-      color: #1e3a8a;
-    }
+    .section b { display: block; margin-top: 1rem; margin-bottom: 0.3rem; font-weight: 600; color: #1e3a8a; }
+    .section table + b { border-top: 2px solid #bfdbfe; padding-top: 0.8rem; margin-top: 1.2rem; }
 
-    .section table + b {
-      border-top: 2px solid #bfdbfe;
-      padding-top: 0.8rem;
-      margin-top: 1.2rem;
-    }
-
-    /* Next Steps Card */
+    /* Next Steps */
     .next-steps {
-      background: #e0edff;
-      border-left: 4px solid #2563eb;
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-top: 1.8rem;
-      text-align: center;
-      color: #1e3a8a;
+      background: #e0edff; border-left: 4px solid #2563eb; border-radius: 12px; padding: 1.5rem; margin-top: 1.8rem; text-align: center; color: #1e3a8a;
     }
-
-    .next-steps h4 {
-      margin: 0 0 0.5rem;
-      font-size: 1.2rem;
-    }
-
-    .next-steps p {
-      margin: 0.2rem 0 1rem;
-      color: #334155;
-    }
-
-    .next-steps .btn {
-      display: inline-block;
-      margin: 0.4rem;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-
-    .btn-primary {
-      background: linear-gradient(90deg, #2563eb, #1d4ed8);
-      color: white;
-    }
+    .next-steps h4 { margin: 0 0 0.5rem; font-size: 1.2rem; }
+    .next-steps .btn { display: inline-block; margin: 0.4rem; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.2s ease; }
+    .btn-primary { background: linear-gradient(90deg, #2563eb, #1d4ed8); color: white; }
     .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary { background: white; color: #1e3a8a; border: 2px solid #1e3a8a; }
+    .btn-secondary:hover { background: #eff6ff; }
 
-    .btn-secondary {
-      background: white;
-      color: #1e3a8a;
-      border: 2px solid #1e3a8a;
-    }
-    .btn-secondary:hover {
-      background: #eff6ff;
-    }
+    footer { text-align: center; padding: 2rem; background: #1e293b; color: #cbd5e1; font-size: 0.9rem; }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #1e293b;
-      color: #cbd5e1;
-      font-size: 0.9rem;
+    /* Loader */
+    .loader {
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #2563eb;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      animation: spin 1s linear infinite, glow 2s ease-in-out infinite alternate;
+      margin-bottom: 1rem;
     }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes glow { from { box-shadow: 0 0 0px #2563eb; } to { box-shadow: 0 0 18px #60a5fa; } }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(15,23,42,0.45);
+      display: none; align-items: center; justify-content: center; padding: 1rem; z-index: 50;
+    }
+    .modal { background: #fff; border-radius: 14px; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.25); overflow: hidden; }
+    .modal-header { background: linear-gradient(135deg,#2563eb,#1e3a8a); color: #fff; padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items:center; }
+    .close-btn { background: transparent; border: none; color: #fff; font-size: 1.2rem; cursor: pointer; }
+    .modal-body { padding: 1.2rem; }
+    .input { width: 100%; border: 1px solid #e5e7eb; border-radius: 10px; padding: .7rem .9rem; font-size: 1rem; }
+    .submit-btn { margin-top: .6rem; background: #2563eb; color: #fff; border: none; border-radius: 10px; padding: .75rem 1rem; font-weight: 700; cursor: pointer; width: 100%; }
   </style>
 </head>
 
@@ -288,21 +182,9 @@
     </div>
 
     <div class="feature-row">
-      <div class="feature">
-        <span>⚡</span>
-        <h4>Instant Results</h4>
-        <p>See your policy breakdown in seconds using AI-powered document parsing.</p>
-      </div>
-      <div class="feature">
-        <span>🔍</span>
-        <h4>Cover Transparency</h4>
-        <p>Compare buildings and contents cover line-by-line for true clarity.</p>
-      </div>
-      <div class="feature">
-        <span>🤝</span>
-        <h4>Trusted Insights</h4>
-        <p>Built to help homeowners make confident, data-driven decisions.</p>
-      </div>
+      <div class="feature"><span>⚡</span><h4>Instant Results</h4><p>See your policy breakdown in seconds using AI-powered document parsing.</p></div>
+      <div class="feature"><span>🔍</span><h4>Cover Transparency</h4><p>Compare buildings and contents cover line-by-line for true clarity.</p></div>
+      <div class="feature"><span>🤝</span><h4>Trusted Insights</h4><p>Built to help homeowners make confident, data-driven decisions.</p></div>
     </div>
   </section>
 
@@ -319,24 +201,48 @@
 
   <footer>© 2025 PolicyScanner — Building trust in insurance through transparency.</footer>
 
+  <!-- Waitlist Modal -->
+  <div id="waitlistBackdrop" class="modal-backdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="waitlistTitle">Join Early Access</h3>
+        <button class="close-btn" onclick="closeWaitlist()">×</button>
+      </div>
+      <div class="modal-body">
+        <p id="waitlistSubtitle">Enter your email to be notified when this feature goes live.</p>
+        <form id="waitlistForm">
+          <input type="hidden" id="featureField" name="feature" />
+          <input type="email" id="waitlistEmail" name="email" placeholder="you@example.com" required class="input" />
+          <button type="submit" class="submit-btn">Join Waitlist</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <script>
     const money = v => v ? `£${Number(v).toLocaleString()}` : "N/A";
+
+    function showLoader() {
+      const result = document.getElementById("result");
+      result.innerHTML = `
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 0;color:#1e3a8a;animation:fadeIn 0.5s ease;">
+          <div class="loader"></div>
+          <p style="margin-top:1rem;font-weight:600;">Analysing your document…</p>
+          <p style="color:#64748b;font-size:.9rem;">Extracting cover details securely</p>
+        </div>`;
+    }
 
     async function uploadFile() {
       const f = document.getElementById("fileInput").files[0];
       const result = document.getElementById("result");
       if (!f) return alert("Please select a file first.");
-
-      result.innerHTML = "<em>Analysing your document...</em>";
+      showLoader();
 
       const fd = new FormData();
       fd.append("file", f);
 
       try {
-        const res = await fetch("https://policyscanner-backend.onrender.com/upload", {
-          method: "POST",
-          body: fd
-        });
+        const res = await fetch("https://policyscanner-backend.onrender.com/upload", { method: "POST", body: fd });
         const d = await res.json();
         result.innerHTML = render(d);
       } catch (e) {
@@ -365,50 +271,17 @@
             <tr><td>Type</td><td>${d.property_type || "N/A"}</td></tr>
             <tr><td>Bedrooms</td><td>${d.bedrooms || "N/A"}</td></tr>
             <tr><td>Bathrooms</td><td>${d.bathrooms || "N/A"}</td></tr>
-            <tr><td>Year Built</td><td>${d.year_built || "N/A"}</td></tr>
-            <tr><td>Construction</td><td>${d.construction_type || "N/A"}</td></tr>
-            <tr><td>Roof Type</td><td>${d.roof_type || "N/A"}</td></tr>
-            <tr><td>Flat Roof %</td><td>${d.flat_roof_percentage || "N/A"}</td></tr>
-            <tr><td>Listed Status</td><td>${d.listed_status || "N/A"}</td></tr>
           </table>
         </div>
 
         <div class="section">
           <h4>💰 Financials & Excesses</h4>
           <p><b>Renewal Premium:</b> ${money(d.renewal_premium)}</p>
-
           <b>Excesses:</b>
           <table>
             <tr><th></th><th>Buildings</th><th>Contents</th></tr>
             <tr><td>Voluntary</td><td>${money(d.excess_buildings_voluntary || d.excess_voluntary)}</td><td>${money(d.excess_contents_voluntary || d.excess_voluntary)}</td></tr>
             <tr><td>Compulsory</td><td>${money(d.excess_buildings_compulsory || d.excess_standard)}</td><td>${money(d.excess_contents_compulsory || d.excess_standard)}</td></tr>
-          </table>
-
-          <b>No Claims Discount:</b>
-          <table>
-            <tr><th></th><th>Buildings</th><th>Contents</th></tr>
-            <tr><td>Years</td><td>${d.no_claims_discount_buildings_years || "N/A"}</td><td>${d.no_claims_discount_contents_years || "N/A"}</td></tr>
-          </table>
-
-          <b>Previous Claims:</b>
-          ${Array.isArray(d.previous_claims) && d.previous_claims.length ? `
-            <table>
-              <tr><th>Date</th><th>Type</th><th>Amount</th></tr>
-              ${d.previous_claims.map(c => `<tr><td>${c.date}</td><td>${c.type}</td><td>${money(c.amount)}</td></tr>`).join("")}
-            </table>
-          ` : "None reported."}
-        </div>
-
-        <div class="section">
-          <h4>🧾 Cover Breakdown</h4>
-          <table>
-            <tr><td>Buildings Sum Insured</td><td>${money(d.buildings_sum_insured)}</td></tr>
-            <tr><td>Contents Sum Insured</td><td>${money(d.contents_sum_insured)}</td></tr>
-            <tr><td>Accidental Damage (Buildings)</td><td>${d.accidental_damage_buildings || d.accidental_damage_cover || "N/A"}</td></tr>
-            <tr><td>Accidental Damage (Contents)</td><td>${d.accidental_damage_contents || d.accidental_damage_cover || "N/A"}</td></tr>
-            <tr><td>Legal Expenses Cover</td><td>${d.legal_expenses_cover || "N/A"}</td></tr>
-            <tr><td>Personal Possessions Cover</td><td>${d.personal_possessions_cover || "N/A"}</td></tr>
-            <tr><td>Home Emergency Cover</td><td>${d.home_emergency_cover || "N/A"}</td></tr>
           </table>
         </div>
 
@@ -419,17 +292,12 @@
             <table>
               <tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
               ${d.specified_items.map(i => `<tr><td>${i.item}</td><td>${money(i.value)}</td><td>${i.away_from_home || "N/A"}</td></tr>`).join("")}
-            </table>
-          ` : "None listed."}
-
+            </table>` : "None listed."}
           <b>Endorsements:</b>
           ${Array.isArray(d.endorsements) && d.endorsements.length ? `<ul>${d.endorsements.map(e => `<li>${e}</li>`).join("")}</ul>` : "None."}
-
           <b>Exclusions:</b>
           ${Array.isArray(d.exclusions) && d.exclusions.length ? `<ul>${d.exclusions.map(e => `<li>${e}</li>`).join("")}</ul>` : "None."}
         </div>
-
-               </div>
 
         <div class="next-steps">
           <h4>🚀 Next Steps</h4>
@@ -457,7 +325,7 @@
       e.preventDefault();
       const email = document.getElementById('waitlistEmail').value;
       const feature = document.getElementById('featureField').value;
-      const res = await fetch(FORM_ENDPOINT, {
+      await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, feature })
