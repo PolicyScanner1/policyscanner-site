@@ -429,14 +429,42 @@
           ${Array.isArray(d.exclusions) && d.exclusions.length ? `<ul>${d.exclusions.map(e => `<li>${e}</li>`).join("")}</ul>` : "None."}
         </div>
 
+               </div>
+
         <div class="next-steps">
           <h4>🚀 Next Steps</h4>
           <p>Ready to take control of your home insurance?</p>
-          <a class="btn btn-primary" href="#">Compare Your Renewal (Coming Soon)</a>
-          <a class="btn btn-secondary" href="#">Get a New Quote (Coming Soon)</a>
+          <a class="btn btn-primary" href="#" onclick="openWaitlist('Compare Your Renewal')">Compare Your Renewal (Coming Soon)</a>
+          <a class="btn btn-secondary" href="#" onclick="openWaitlist('Get a New Quote')">Get a New Quote (Coming Soon)</a>
         </div>
       `;
     }
+
+    /* Waitlist Modal Logic */
+    const FORM_ENDPOINT = 'FORM_ENDPOINT_HERE';
+
+    function openWaitlist(feature) {
+      document.getElementById('waitlistBackdrop').style.display = 'flex';
+      document.getElementById('featureField').value = feature;
+      document.getElementById('waitlistTitle').innerText = feature + ' — Early Access';
+    }
+
+    function closeWaitlist() {
+      document.getElementById('waitlistBackdrop').style.display = 'none';
+    }
+
+    document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('waitlistEmail').value;
+      const feature = document.getElementById('featureField').value;
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, feature })
+      });
+      alert('Thanks for joining! You’ll be notified when it launches.');
+      closeWaitlist();
+    });
   </script>
 </body>
 </html>
