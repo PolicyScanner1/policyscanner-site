@@ -411,8 +411,8 @@
   <div class="next-steps">
   <h4>🚀 Next Steps</h4>
   <p>Ready to take control of your home insurance?</p>
-  <a class="btn btn-primary" href="#" style="pointer-events:none;opacity:0.8;">Compare Your Renewal <small>(Coming Soon)</small></a>
-  <a class="btn btn-secondary" href="#" style="pointer-events:none;opacity:0.8;">Get a New Quote <small>(Coming Soon)</small></a>
+  <a class="btn btn-primary" href="#" onclick="comingSoon()">Compare Your Renewal <small>(Coming Soon)</small></a>
+  <a class="btn btn-secondary" href="#" onclick="comingSoon()">Get a New Quote <small>(Coming Soon)</small></a>
 </div>
 `;
 }
@@ -432,6 +432,14 @@
       const modal = document.getElementById("waitlistModal");
       if (e.target == modal) modal.style.display = "none";
     };
-  </script>
+
+    `;
+}
+
+function comingSoon() {
+  alert("🚧 This feature is coming soon! Stay tuned for updates.");
+}
+</script>
 </body>
 </html>
+
