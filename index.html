@@ -381,14 +381,32 @@
       </table>
     </div>
 
-    <div class="section">
-      <h4>⚠️ Endorsements & Exclusions</h4>
-      <b>Specified Items:</b>
-      ${Array.isArray(d.specified_items) && d.specified_items.length ? `
-        <table><tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
-        ${d.specified_items.map(i => `<tr><td>${i.item}</td><td>£${i.value}</td><td>${i.away_from_home || "N/A"}</td></tr>`).join("")}</table>
-      ` : "None listed."}
-    </div>
+   <div class="section">
+  <h4>⚠️ Endorsements & Exclusions</h4>
+
+  <b>Specified Items:</b>
+  ${Array.isArray(d.specified_items) && d.specified_items.length ? `
+    <table>
+      <tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
+      ${d.specified_items.map(i => `<tr><td>${i.item}</td><td>£${i.value}</td><td>${i.away_from_home || "N/A"}</td></tr>`).join("")}
+    </table>
+  ` : "None listed."}
+
+  <hr style="border:0;border-top:2px solid #bfdbfe;margin:1.2rem 0;" />
+
+  <b>Endorsements:</b>
+  ${Array.isArray(d.endorsements) && d.endorsements.length ? `
+    <ul>${d.endorsements.map(e => `<li>${e}</li>`).join("")}</ul>
+  ` : "None."}
+
+  <hr style="border:0;border-top:2px solid #bfdbfe;margin:1.2rem 0;" />
+
+  <b>Exclusions:</b>
+  ${Array.isArray(d.exclusions) && d.exclusions.length ? `
+    <ul>${d.exclusions.map(e => `<li>${e}</li>`).join("")}</ul>
+  ` : "None."}
+</div>
+
 
     <div class="next-steps">
       <h4>🚀 Next Steps</h4>
