@@ -331,24 +331,73 @@
     }
 
     function render(d) {
-      return `
-        <div class="section">
-          <h4>📋 Policy Summary</h4>
-          <table>
-            <tr><td>Policyholder</td><td>${d.policyholder_name || "N/A"}</td></tr>
-            <tr><td>Insurer</td><td>${d.insurer_name || "N/A"}</td></tr>
-            <tr><td>Policy Number</td><td>${d.policy_number || "N/A"}</td></tr>
-            <tr><td>Start Date</td><td>${d.start_date || "N/A"}</td></tr>
-            <tr><td>End Date</td><td>${d.end_date || "N/A"}</td></tr>
-          </table>
-        </div>
-        <div class="next-steps">
-          <h4>🚀 Next Steps</h4>
-          <p>Ready to take control of your home insurance?</p>
-          <a class="btn btn-primary" href="#" onclick="openModal()">Compare Your Renewal</a>
-          <a class="btn btn-secondary" href="#" onclick="openModal()">Get a New Quote</a>
-        </div>`;
-    }
+  return `
+    <div class="section">
+      <h4>📋 Policy Summary</h4>
+      <table>
+        <tr><td>Policyholder</td><td>${d.policyholder_name || "N/A"}</td></tr>
+        <tr><td>Insurer</td><td>${d.insurer_name || "N/A"}</td></tr>
+        <tr><td>Policy Number</td><td>${d.policy_number || "N/A"}</td></tr>
+        <tr><td>Start Date</td><td>${d.start_date || "N/A"}</td></tr>
+        <tr><td>End Date</td><td>${d.end_date || "N/A"}</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h4>🏠 Property Details</h4>
+      <table>
+        <tr><td>Address</td><td>${d.address || "N/A"}</td></tr>
+        <tr><td>Postcode</td><td>${d.postcode || "N/A"}</td></tr>
+        <tr><td>Property Type</td><td>${d.property_type || "N/A"}</td></tr>
+        <tr><td>Bedrooms</td><td>${d.bedrooms || "N/A"}</td></tr>
+        <tr><td>Bathrooms</td><td>${d.bathrooms || "N/A"}</td></tr>
+        <tr><td>Year Built</td><td>${d.year_built || "N/A"}</td></tr>
+        <tr><td>Construction</td><td>${d.construction_type || "N/A"}</td></tr>
+        <tr><td>Roof Type</td><td>${d.roof_type || "N/A"}</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h4>💰 Financials & Excesses</h4>
+      <p><b>Renewal Premium:</b> £${d.renewal_premium || "N/A"}</p>
+      <b>Excesses:</b>
+      <table>
+        <tr><th></th><th>Buildings</th><th>Contents</th></tr>
+        <tr><td>Voluntary</td><td>£${d.excess_buildings_voluntary || d.excess_voluntary || "N/A"}</td><td>£${d.excess_contents_voluntary || d.excess_voluntary || "N/A"}</td></tr>
+        <tr><td>Compulsory</td><td>£${d.excess_buildings_compulsory || d.excess_standard || "N/A"}</td><td>£${d.excess_contents_compulsory || d.excess_standard || "N/A"}</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h4>🧾 Cover Breakdown</h4>
+      <table>
+        <tr><td>Buildings Sum Insured</td><td>£${d.buildings_sum_insured || "N/A"}</td></tr>
+        <tr><td>Contents Sum Insured</td><td>£${d.contents_sum_insured || "N/A"}</td></tr>
+        <tr><td>Accidental Damage (Buildings)</td><td>${d.accidental_damage_buildings || d.accidental_damage_cover || "N/A"}</td></tr>
+        <tr><td>Accidental Damage (Contents)</td><td>${d.accidental_damage_contents || d.accidental_damage_cover || "N/A"}</td></tr>
+        <tr><td>Legal Expenses Cover</td><td>${d.legal_expenses_cover || "N/A"}</td></tr>
+        <tr><td>Home Emergency Cover</td><td>${d.home_emergency_cover || "N/A"}</td></tr>
+        <tr><td>Personal Possessions Cover</td><td>${d.personal_possessions_cover || "N/A"}</td></tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h4>⚠️ Endorsements & Exclusions</h4>
+      <b>Specified Items:</b>
+      ${Array.isArray(d.specified_items) && d.specified_items.length ? `
+        <table><tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
+        ${d.specified_items.map(i => `<tr><td>${i.item}</td><td>£${i.value}</td><td>${i.away_from_home || "N/A"}</td></tr>`).join("")}</table>
+      ` : "None listed."}
+    </div>
+
+    <div class="next-steps">
+      <h4>🚀 Next Steps</h4>
+      <p>Ready to take control of your home insurance?</p>
+      <a class="btn btn-primary" href="#" onclick="openModal()">Compare Your Renewal</a>
+      <a class="btn btn-secondary" href="#" onclick="openModal()">Get a New Quote</a>
+    </div>`;
+}
+
 
     function openModal() {
       document.getElementById("waitlistModal").style.display = "flex";
