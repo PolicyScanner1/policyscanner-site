@@ -53,8 +53,16 @@
       animation: fadeIn 1.2s ease;
     }
 
-    .hero h2 { font-size: 2rem; margin-bottom: 0.8rem; }
-    .hero p { color: #dbeafe; font-size: 1.05rem; line-height: 1.6; }
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero p {
+      color: #dbeafe;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
 
     .hero button {
       margin-top: 1rem;
@@ -90,9 +98,22 @@
       color: #f1f5f9;
     }
 
-    .feature span { font-size: 1.8rem; display: block; margin-bottom: 0.3rem; }
-    .feature h4 { margin: 0.4rem 0 0.3rem; color: white; }
-    .feature p { font-size: 0.95rem; color: #cbd5e1; line-height: 1.4; }
+    .feature span {
+      font-size: 1.8rem;
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .feature h4 {
+      margin: 0.4rem 0 0.3rem;
+      color: white;
+    }
+
+    .feature p {
+      font-size: 0.95rem;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -116,7 +137,10 @@
       width: 100%;
     }
 
-    .upload-area { text-align: center; margin-bottom: 1.5rem; }
+    .upload-area {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
 
     .custom-file-upload {
       background: #2563eb;
@@ -143,8 +167,7 @@
     }
     button.upload:hover { background: #172554; }
 
-    @keyframes spin { from {transform: rotate(0)} to {transform: rotate(360deg)} }
-
+    /* ===== Results formatting ===== */
     .section {
       background: #f1f5f9;
       border-radius: 12px;
@@ -174,8 +197,24 @@
 
     th { background: #f8fafc; color: #1e3a8a; }
     td:first-child { font-weight: 500; color: #334155; }
+
     ul { margin: 0.4rem 0 0.6rem 1.2rem; color: #0f172a; }
 
+    .section b {
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+      color: #1e3a8a;
+    }
+
+    .section table + b {
+      border-top: 2px solid #bfdbfe;
+      padding-top: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    /* Next Steps Card */
     .next-steps {
       background: #e0edff;
       border-left: 4px solid #2563eb;
@@ -186,7 +225,17 @@
       color: #1e3a8a;
     }
 
-    .btn {
+    .next-steps h4 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .next-steps p {
+      margin: 0.2rem 0 1rem;
+      color: #334155;
+    }
+
+    .next-steps .btn {
       display: inline-block;
       margin: 0.4rem;
       padding: 0.75rem 1.5rem;
@@ -195,55 +244,19 @@
       text-decoration: none;
       transition: all 0.2s ease;
     }
+
     .btn-primary {
       background: linear-gradient(90deg, #2563eb, #1d4ed8);
       color: white;
     }
+    .btn-primary:hover { opacity: 0.9; }
+
     .btn-secondary {
       background: white;
       color: #1e3a8a;
       border: 2px solid #1e3a8a;
     }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      justify-content: center;
-      align-items: center;
-      z-index: 50;
-    }
-
-    .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-      text-align: center;
-    }
-
-    .modal-content h3 { color: #1e3a8a; margin-bottom: 1rem; }
-    .modal-content input {
-      width: 90%;
-      margin: 0.4rem 0;
-      padding: 0.6rem;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-    }
-    .modal-content button {
-      margin-top: 0.8rem;
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.4rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .modal-content button:hover { background: #1d4ed8; }
+    .btn-secondary:hover { background: #eff6ff; }
 
     footer {
       text-align: center;
@@ -259,7 +272,7 @@
   <header>
     <h1>PolicyScanner</h1>
     <nav>
-      <a href="#upload-section">Compare</a>
+      <a href="#demo">Compare</a>
       <a href="mailto:hello@policyscanner.co.uk">Contact</a>
     </nav>
   </header>
@@ -272,9 +285,21 @@
     </div>
 
     <div class="feature-row">
-      <div class="feature"><span>⚡</span><h4>Instant Results</h4><p>AI-powered document parsing in seconds.</p></div>
-      <div class="feature"><span>🔍</span><h4>Cover Transparency</h4><p>See buildings and contents cover line-by-line.</p></div>
-      <div class="feature"><span>🤝</span><h4>Trusted Insights</h4><p>Helping homeowners make data-driven decisions.</p></div>
+      <div class="feature">
+        <span>⚡</span>
+        <h4>Instant Results</h4>
+        <p>See your policy breakdown in seconds using AI-powered document parsing.</p>
+      </div>
+      <div class="feature">
+        <span>🔍</span>
+        <h4>Cover Transparency</h4>
+        <p>Compare buildings and contents cover line-by-line for true clarity.</p>
+      </div>
+      <div class="feature">
+        <span>🤝</span>
+        <h4>Trusted Insights</h4>
+        <p>Built to help homeowners make confident, data-driven decisions.</p>
+      </div>
     </div>
   </section>
 
@@ -283,27 +308,13 @@
       <div class="upload-area">
         <label for="fileInput" class="custom-file-upload">📄 Choose File</label>
         <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
-        <button class="upload" onclick="uploadFile()">Upload & Analyse</button>
+        <button id="uploadBtn" type="button" class="upload">Upload & Analyse</button>
       </div>
       <div id="result"></div>
     </div>
   </div>
 
   <footer>© 2025 PolicyScanner — Building trust in insurance through transparency.</footer>
-
-  <!-- Modal -->
-  <div id="waitlistModal" class="modal">
-    <div class="modal-content">
-      <h3>Join the Waitlist</h3>
-      <form action="https://formspree.io/f/xgvpelrd" method="POST" onsubmit="submitted(event)">
-        <input type="text" name="name" placeholder="Your Name" required><br>
-        <input type="email" name="email" placeholder="Your Email" required><br>
-        <button type="submit">Join Now</button>
-      </form>
-      <p id="modalMsg" style="color:#16a34a;margin-top:1rem;display:none;">✅ Thank you! You're on the list.</p>
-    </div>
-  </div>
-
   <script>
     const money = v => v ? `£${Number(v).toLocaleString()}` : "N/A";
 
@@ -312,17 +323,23 @@
       const result = document.getElementById("result");
       if (!f) return alert("Please select a file first.");
 
+      // Nice loader
       result.innerHTML = `
-        <div style="display:flex;align-items:center;gap:.8rem;color:#334155">
-          <div class="spinner" style="width:22px;height:22px;border:3px solid #e2e8f0;border-top-color:#2563eb;border-radius:50%;animation:spin .8s linear infinite"></div>
-          <span>Analysing your document…</span>
-        </div>`;
-
-      const fd = new FormData();
-      fd.append("file", f);
+        <div style="text-align:center; padding:1.5rem;">
+          <div style="width:32px;height:32px;margin:auto;border:4px solid #93c5fd;border-top:4px solid #2563eb;border-radius:50%;animation:spin 1s linear infinite;"></div>
+          <p style="margin-top:1rem;color:#1e3a8a;">Analysing your document...</p>
+        </div>
+      `;
 
       try {
-        const res = await fetch("https://policyscanner-backend.onrender.com/upload", { method: "POST", body: fd });
+        const fd = new FormData();
+        fd.append("file", f);
+
+        const res = await fetch("https://policyscanner-backend.onrender.com/upload", {
+          method: "POST",
+          body: fd
+        });
+
         const d = await res.json();
         result.innerHTML = render(d);
       } catch (e) {
@@ -331,115 +348,125 @@
     }
 
     function render(d) {
-  return `
-    <div class="section">
-      <h4>📋 Policy Summary</h4>
-      <table>
-        <tr><td>Policyholder</td><td>${d.policyholder_name || "N/A"}</td></tr>
-        <tr><td>Insurer</td><td>${d.insurer_name || "N/A"}</td></tr>
-        <tr><td>Policy Number</td><td>${d.policy_number || "N/A"}</td></tr>
-        <tr><td>Start Date</td><td>${d.start_date || "N/A"}</td></tr>
-        <tr><td>End Date</td><td>${d.end_date || "N/A"}</td></tr>
-      </table>
-    </div>
+      return `
+        <div class="section">
+          <h4>📋 Policy Summary</h4>
+          <table>
+            <tr><td>Policyholder</td><td>${d.policyholder_name || "N/A"}</td></tr>
+            <tr><td>Insurer</td><td>${d.insurer_name || "N/A"}</td></tr>
+            <tr><td>Policy Number</td><td>${d.policy_number || "N/A"}</td></tr>
+            <tr><td>Start Date</td><td>${d.start_date || "N/A"}</td></tr>
+            <tr><td>End Date</td><td>${d.end_date || "N/A"}</td></tr>
+          </table>
+        </div>
 
-    <div class="section">
-      <h4>🏠 Property Details</h4>
-      <table>
-        <tr><td>Address</td><td>${d.address || "N/A"}</td></tr>
-        <tr><td>Postcode</td><td>${d.postcode || "N/A"}</td></tr>
-        <tr><td>Property Type</td><td>${d.property_type || "N/A"}</td></tr>
-        <tr><td>Bedrooms</td><td>${d.bedrooms || "N/A"}</td></tr>
-        <tr><td>Bathrooms</td><td>${d.bathrooms || "N/A"}</td></tr>
-        <tr><td>Year Built</td><td>${d.year_built || "N/A"}</td></tr>
-        <tr><td>Construction</td><td>${d.construction_type || "N/A"}</td></tr>
-        <tr><td>Roof Type</td><td>${d.roof_type || "N/A"}</td></tr>
-      </table>
-    </div>
+        <div class="section">
+          <h4>🏠 Property Details</h4>
+          <table>
+            <tr><td>Address</td><td>${d.address || "N/A"}</td></tr>
+            <tr><td>Postcode</td><td>${d.postcode || "N/A"}</td></tr>
+            <tr><td>Type</td><td>${d.property_type || "N/A"}</td></tr>
+            <tr><td>Bedrooms</td><td>${d.bedrooms || "N/A"}</td></tr>
+            <tr><td>Bathrooms</td><td>${d.bathrooms || "N/A"}</td></tr>
+            <tr><td>Year Built</td><td>${d.year_built || "N/A"}</td></tr>
+            <tr><td>Construction</td><td>${d.construction_type || "N/A"}</td></tr>
+            <tr><td>Roof Type</td><td>${d.roof_type || "N/A"}</td></tr>
+            <tr><td>Flat Roof %</td><td>${d.flat_roof_percentage || "N/A"}</td></tr>
+            <tr><td>Listed Status</td><td>${d.listed_status || "N/A"}</td></tr>
+          </table>
+        </div>
 
-    <div class="section">
-      <h4>💰 Financials & Excesses</h4>
-      <p><b>Renewal Premium:</b> £${d.renewal_premium || "N/A"}</p>
-      <b>Excesses:</b>
-      <table>
-        <tr><th></th><th>Buildings</th><th>Contents</th></tr>
-        <tr><td>Voluntary</td><td>£${d.excess_buildings_voluntary || d.excess_voluntary || "N/A"}</td><td>£${d.excess_contents_voluntary || d.excess_voluntary || "N/A"}</td></tr>
-        <tr><td>Compulsory</td><td>£${d.excess_buildings_compulsory || d.excess_standard || "N/A"}</td><td>£${d.excess_contents_compulsory || d.excess_standard || "N/A"}</td></tr>
-      </table>
-    </div>
+        <div class="section">
+          <h4>💰 Financials & Excesses</h4>
+          <p><b>Renewal Premium:</b> ${money(d.renewal_premium)}</p>
 
-    <div class="section">
-      <h4>🧾 Cover Breakdown</h4>
-      <table>
-        <tr><td>Buildings Sum Insured</td><td>£${d.buildings_sum_insured || "N/A"}</td></tr>
-        <tr><td>Contents Sum Insured</td><td>£${d.contents_sum_insured || "N/A"}</td></tr>
-        <tr><td>Accidental Damage (Buildings)</td><td>${d.accidental_damage_buildings || d.accidental_damage_cover || "N/A"}</td></tr>
-        <tr><td>Accidental Damage (Contents)</td><td>${d.accidental_damage_contents || d.accidental_damage_cover || "N/A"}</td></tr>
-        <tr><td>Legal Expenses Cover</td><td>${d.legal_expenses_cover || "N/A"}</td></tr>
-        <tr><td>Home Emergency Cover</td><td>${d.home_emergency_cover || "N/A"}</td></tr>
-        <tr><td>Personal Possessions Cover</td><td>${d.personal_possessions_cover || "N/A"}</td></tr>
-      </table>
-    </div>
+          <b>Excesses:</b>
+          <table>
+            <tr><th></th><th>Buildings</th><th>Contents</th></tr>
+            <tr><td>Voluntary</td><td>${money(d.excess_buildings_voluntary || d.excess_voluntary)}</td><td>${money(d.excess_contents_voluntary || d.excess_voluntary)}</td></tr>
+            <tr><td>Compulsory</td><td>${money(d.excess_buildings_compulsory || d.excess_standard)}</td><td>${money(d.excess_contents_compulsory || d.excess_standard)}</td></tr>
+          </table>
 
-   <div class="section">
-  <h4>⚠️ Endorsements & Exclusions</h4>
+          <b>No Claims Discount:</b>
+          <table>
+            <tr><th></th><th>Buildings</th><th>Contents</th></tr>
+            <tr><td>Years</td><td>${d.no_claims_discount_buildings_years || "N/A"}</td><td>${d.no_claims_discount_contents_years || "N/A"}</td></tr>
+          </table>
 
-  <b>Specified Items:</b>
-  ${Array.isArray(d.specified_items) && d.specified_items.length ? `
-    <table>
-      <tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
-      ${d.specified_items.map(i => `<tr><td>${i.item}</td><td>£${i.value}</td><td>${i.away_from_home || "N/A"}</td></tr>`).join("")}
-    </table>
-  ` : "None listed."}
+          <b>Previous Claims:</b>
+          ${Array.isArray(d.previous_claims) && d.previous_claims.length ? `
+            <table>
+              <tr><th>Date</th><th>Type</th><th>Amount</th></tr>
+              ${d.previous_claims.map(c => `<tr><td>${c.date}</td><td>${c.type}</td><td>${money(c.amount)}</td></tr>`).join("")}
+            </table>
+          ` : "None reported."}
+        </div>
 
-  <hr style="border:0;border-top:2px solid #bfdbfe;margin:1.2rem 0;" />
+        <div class="section">
+          <h4>🧾 Cover Breakdown</h4>
+          <table>
+            <tr><td>Buildings Sum Insured</td><td>${money(d.buildings_sum_insured)}</td></tr>
+            <tr><td>Contents Sum Insured</td><td>${money(d.contents_sum_insured)}</td></tr>
+            <tr><td>Accidental Damage (Buildings)</td><td>${d.accidental_damage_buildings || d.accidental_damage_cover || "N/A"}</td></tr>
+            <tr><td>Accidental Damage (Contents)</td><td>${d.accidental_damage_contents || d.accidental_damage_cover || "N/A"}</td></tr>
+            <tr><td>Legal Expenses Cover</td><td>${d.legal_expenses_cover || "N/A"}</td></tr>
+            <tr><td>Personal Possessions Cover</td><td>${d.personal_possessions_cover || "N/A"}</td></tr>
+            <tr><td>Home Emergency Cover</td><td>${d.home_emergency_cover || "N/A"}</td></tr>
+          </table>
+        </div>
 
-  <b>Endorsements:</b>
-  ${Array.isArray(d.endorsements) && d.endorsements.length ? `
-    <ul>${d.endorsements.map(e => `<li>${e}</li>`).join("")}</ul>
-  ` : "None."}
+        <div class="section">
+          <h4>⚠️ Endorsements & Exclusions</h4>
+          <b>Specified Items:</b>
+          ${Array.isArray(d.specified_items) && d.specified_items.length ? `
+            <table>
+              <tr><th>Item</th><th>Value</th><th>Covered Away From Home</th></tr>
+              ${d.specified_items.map(i => `<tr><td>${i.item}</td><td>${money(i.value)}</td><td>${i.away_from_home || "N/A"}</td></tr>`).join("")}
+            </table>
+          ` : "None listed."}
 
-  <hr style="border:0;border-top:2px solid #bfdbfe;margin:1.2rem 0;" />
+          <hr style="border: none; border-top: 2px solid #bfdbfe; margin: 1rem 0;">
 
-  <b>Exclusions:</b>
-  ${Array.isArray(d.exclusions) && d.exclusions.length ? `
-    <ul>${d.exclusions.map(e => `<li>${e}</li>`).join("")}</ul>
-  ` : "None."}
-</div>
+          <b>Endorsements:</b>
+          ${Array.isArray(d.endorsements) && d.endorsements.length ? `<ul>${d.endorsements.map(e => `<li>${e}</li>`).join("")}</ul>` : "None."}
 
+          <b>Exclusions:</b>
+          ${Array.isArray(d.exclusions) && d.exclusions.length ? `<ul>${d.exclusions.map(e => `<li>${e}</li>`).join("")}</ul>` : "None."}
+        </div>
 
-  <div class="next-steps">
-  <h4>🚀 Next Steps</h4>
-  <p>Ready to take control of your home insurance?</p>
-  <a class="btn btn-primary" href="#" onclick="comingSoon()">Compare Your Renewal <small>(Coming Soon)</small></a>
-  <a class="btn btn-secondary" href="#" onclick="comingSoon()">Get a New Quote <small>(Coming Soon)</small></a>
-</div>
-`;
-}
-
-
-    function openModal() {
-      document.getElementById("waitlistModal").style.display = "flex";
+        <div class="next-steps">
+          <h4>🚀 Next Steps</h4>
+          <p>Ready to take control of your home insurance?</p>
+          <button id="compareBtn" type="button" class="btn btn-primary">
+            Compare Your Renewal <span class="soon">(Coming Soon)</span>
+          </button>
+          <button id="quoteBtn" type="button" class="btn btn-secondary">
+            Get a New Quote <span class="soon">(Coming Soon)</span>
+          </button>
+        </div>
+      `;
     }
-    function submitted(e) {
-      e.preventDefault();
-      const msg = document.getElementById("modalMsg");
-      msg.style.display = "block";
-      setTimeout(()=>document.getElementById("waitlistModal").style.display="none",1500);
-      e.target.reset();
+
+    // Coming soon + button event handlers
+    function comingSoon() {
+      alert("🚧 This feature is coming soon! Stay tuned for updates.");
     }
-    window.onclick = function(e) {
-      const modal = document.getElementById("waitlistModal");
-      if (e.target == modal) modal.style.display = "none";
-    };
 
-    `;
-}
+    document.addEventListener('DOMContentLoaded', () => {
+      const uploadBtn = document.getElementById('uploadBtn');
+      const compareBtn = document.getElementById('compareBtn');
+      const quoteBtn = document.getElementById('quoteBtn');
 
-function comingSoon() {
-  alert("🚧 This feature is coming soon! Stay tuned for updates.");
-}
-</script>
+      if (uploadBtn) uploadBtn.addEventListener('click', uploadFile);
+      if (compareBtn) compareBtn.addEventListener('click', comingSoon);
+      if (quoteBtn) quoteBtn.addEventListener('click', comingSoon);
+    });
+
+    // simple spinner animation
+    const style = document.createElement('style');
+    style.textContent = `@keyframes spin { 0%{transform:rotate(0deg)}100%{transform:rotate(360deg)} }`;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
 
